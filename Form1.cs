@@ -16,5 +16,24 @@ namespace wf_CanteenManagement
         {
             InitializeComponent();
         }
+
+        private void ĐăngXuấtToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void ThôngTinTàiKhoảnToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            fAccountProfile f = new fAccountProfile();
+            f.ShowDialog();
+
+        }
+
+        private void AdminToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            fAdmin f = new fAdmin();
+            f.ShowDialog();
+
+        }
     }
 }
