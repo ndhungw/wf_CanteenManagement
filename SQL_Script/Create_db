@@ -23,7 +23,7 @@ USE Canteen
 -- -----------------------------------------------------
 CREATE TABLE NhanVien (
   [idNhanVien] INT NOT NULL IDENTITY(1,1),
-  [HoTen] VARCHAR(45) NULL,
+  [HoTen] NVARCHAR(45) NULL,
   [NgaySinh] DATETIME2(0) NULL,
   PRIMARY KEY ([idNhanVien]))
 ;
@@ -34,10 +34,10 @@ CREATE TABLE NhanVien (
 -- -----------------------------------------------------
 CREATE TABLE MonAn (
   [idMonAn] INT NOT NULL IDENTITY(1,1),
-  [Ten] VARCHAR(45) NULL,
+  [Ten] NVARCHAR(45) NULL,
   [Gia] INT CHECK ([Gia] > 0) NULL,
-  [MieuTa] VARCHAR(45) NULL,
-  [HinhAnh] VARCHAR(256) NULL,
+  [MieuTa] NVARCHAR(45) NULL,
+  [HinhAnh] NVARCHAR(256) NULL,
   PRIMARY KEY ([idMonAn]))
 ;
 
@@ -93,7 +93,7 @@ CREATE INDEX fk_HoaDon_has_MonAn_HoaDon1_idx ON ChiTietHoaDon ([HoaDon_idHoaDon]
 -- -----------------------------------------------------
 CREATE TABLE LoaiMonAn (
   [idLoaiMonAn] INT NOT NULL IDENTITY(1,1),
-  [Ten_loai] VARCHAR(45) NULL,
+  [Ten_loai] NVARCHAR(45) NULL,
   PRIMARY KEY ([idLoaiMonAn]))
 ;
 
