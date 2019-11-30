@@ -38,6 +38,7 @@ CREATE TABLE MonAn (
   [Ten] VARCHAR(45) NULL,
   [Gia] INT CHECK ([Gia] > 0) NULL,
   [MieuTa] VARCHAR(45) NULL,
+  [HinhAnh] VARCHAR(256) NULL,
   PRIMARY KEY ([idMonAn]))
 ;
 
