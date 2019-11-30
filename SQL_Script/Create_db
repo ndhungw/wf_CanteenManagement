@@ -15,13 +15,13 @@
 -- Schema mydb
 -- -----------------------------------------------------
 
--- -----------------------------------------------------
--- Table `mydb`.`NhanVien`
--- -----------------------------------------------------
 USE master 
 CREATE DATABASE [Canteen]
 GO
 USE [Canteen]
+-- -----------------------------------------------------
+-- Table `mydb`.`NhanVien`
+-- -----------------------------------------------------
 CREATE TABLE NhanVien (
   [idNhanVien] INT NOT NULL,
   [HoTen] VARCHAR(45) NULL,
@@ -43,16 +43,6 @@ CREATE TABLE MonAn (
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`KhachHang`
--- -----------------------------------------------------
-CREATE TABLE KhachHang (
-  [idKhachHang] INT NOT NULL,
-  [HoTen] VARCHAR(45) NULL,
-  PRIMARY KEY ([idKhachHang]))
-;
-
-
--- -----------------------------------------------------
 -- Table `mydb`.`HoaDon`
 -- -----------------------------------------------------
 CREATE TABLE HoaDon (
@@ -63,11 +53,6 @@ CREATE TABLE HoaDon (
   [KhachHang_idKhachHang] INT NOT NULL,
   [NhanVien_idNhanVien] INT NOT NULL,
   PRIMARY KEY ([idHoaDon]),
-  CONSTRAINT [fk_HoaDon_KhachHang1]
-    FOREIGN KEY ([KhachHang_idKhachHang])
-    REFERENCES KhachHang ([idKhachHang])
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
   CONSTRAINT [fk_HoaDon_NhanVien1]
     FOREIGN KEY ([NhanVien_idNhanVien])
     REFERENCES NhanVien ([idNhanVien])
@@ -75,9 +60,7 @@ CREATE TABLE HoaDon (
     ON UPDATE NO ACTION)
 ;
 
-CREATE INDEX fk_HoaDon_KhachHang1_idx ON HoaDon ([KhachHang_idKhachHang] ASC);
-
-CREATE INDEX fk_HoaDon_NhanVien1_idx ON HoaDon ([NhanVien_idNhanVien] ASC);
+CREATE INDEX fk_HoaDon_NhanVien1_idx ON mydb.HoaDon ([NhanVien_idNhanVien] ASC);
 
 
 -- -----------------------------------------------------
@@ -104,6 +87,10 @@ CREATE INDEX fk_HoaDon_has_MonAn_MonAn1_idx ON ChiTietHoaDon ([MonAn_idMonAn] AS
 
 CREATE INDEX fk_HoaDon_has_MonAn_HoaDon1_idx ON ChiTietHoaDon ([HoaDon_idHoaDon] ASC);
 
+
+/* SET SQL_MODE=@OLD_SQL_MODE; */
+/* SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS; */
+/* SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS; */
 
 /* SET SQL_MODE=@OLD_SQL_MODE; */
 /* SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS; */
