@@ -10,6 +10,14 @@ namespace wf_CanteenManagement.DAO
 {
     public class DataProvider
     {
+        private static DataProvider instance;
+        public static DataProvider Instance
+        { get { if (instance == null) instance = new DataProvider(); return DataProvider.instance; }
+            private set { DataProvider.instance = value; }
+        }
+
+        private DataProvider() { }
+
         private string connectionSTR = @"Data Source=.\SQLEXPRESS;Initial Catalog=Canteen;Integrated Security=True";
 
         public DataTable ExecQuery(string query, object[] parameter = null)

@@ -24,9 +24,7 @@ namespace wf_CanteenManagement
         void loadFoodList()
         {
             string query = "SELECT * FROM dbo.MonAn";
-            DataProvider provider = new DataProvider();
-
-            dtgvFood.DataSource = provider.ExecQuery(query);
+            dtgvFood.DataSource = DataProvider.Instance.ExecQuery(query);
         }
     }
 }
