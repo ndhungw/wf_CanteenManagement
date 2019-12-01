@@ -33,12 +33,12 @@ GO
 CREATE PROC Filter_Mon_An_Theo_Loai @DSLOAI LOAI_TEMP READONLY
 AS 
 	SELECT MA.idMonAn,MA.Ten,MA.MieuTa,MA.Gia,MA.HinhAnh
-	FROM MonAn AS MA 
+	FROM MonAn AS MA
 	WHERE NOT EXISTS(
 						SELECT DS.idloai
-						FROM @DSLOAI AS DS 
+						FROM @DSLOAI AS DS
 						EXCEPT(
-									SELECT LMA.MonAn_idMonAn
+									SELECT DISTINCT LMA.LoaiMonAn_idLoaiMonAn
 									FROM MonAn_thuoc_LoaiMon_ AS LMA
 									WHERE MA.idMonAn=LMA.MonAn_idMonAn))
 GO
@@ -57,18 +57,18 @@ CREATE TYPE MonAn_Temp AS TABLE(
 	idMon INT,
 	Soluong INT)
 GO
-
+CREATE TYPE TEMP AS TABLE(
+	IdMon INT)
+GO
 CREATE PROC Them_Hoa_Don @NHANVIEN INT, @DSMON MonAn_Temp READONLY--Nhập vào một bảng gồm món ăn và số lượng
 AS
-	CREATE TYPE TEMP AS TABLE(
-	IdMon INT)
 	DECLARE @NGAYLAP DATETIME,@TONGTIEN INT,@IDMON INT,@TEMP1 TEMP
 	SET @NGAYLAP=GETDATE()
 
 	SET @TONGTIEN=(SELECT SUM(MA.Gia*DS.Soluong)
 	FROM @DSMON AS DS INNER JOIN MonAn AS MA ON DS.idMon=MA.idMonAn)
 
-	INSERT INTO HoaDon(NgayLap,TongTien) VALUES(@NGAYLAP,@TONGTIEN)
+	INSERT INTO HoaDon(NhanVien_idNhanVien,NgayLap,TongTien) VALUES(@NHANVIEN,@NGAYLAP,@TONGTIEN)
 
 	SET @IDMON=@@IDENTITY
 	INSERT INTO @TEMP1(IdMon) VALUES (@IDMON)
@@ -77,6 +77,21 @@ AS
 	(SELECT T.IdMon,DS.idMon,DS.Soluong
 	FROM @TEMP1 AS T,@DSMON AS DS)
 GO											
+CREATE PROC Tim_Hoa_Don_Theo_Ngay @BEGIN DATETIME,@END DATETIME
+AS
+	SELECT CT.HoaDon_idHoaDon,CT.MonAn_idMonAn,CT.SoLuong,HD1.NgayLap,HD1.NhanVien_idNhanVien,HD1.TongTien
+	FROM ChiTietHoaDon AS CT INNER JOIN (SELECT *
+											FROM HoaDon AS HD 
+											WHERE HD.NgayLap BETWEEN @BEGIN AND @END)  AS HD1 ON HD1.idHoaDon=CT.HoaDon_idHoaDon
+GO
 
-
-	
+--Tránh lỗi SQL Injection như ví dụ sau:
+--<		SELECT * FROM dbo.Account WHERE UserName = '' AND PassWord = N'' OR 1=1--'		>
+CREATE PROC USER_Login
+@userName nvarchar(100), @passWord nvarchar(100)
+AS
+BEGIN
+	SELECT * FROM dbo.Account WHERE UserName = @userName AND PassWord = @passWord
+END
+GO
+--EXEC USER_Login 'admin', '1234'

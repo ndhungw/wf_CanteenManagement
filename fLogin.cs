@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using wf_CanteenManagement.DAO;
 
 namespace wf_CanteenManagement
 {
@@ -33,10 +34,24 @@ namespace wf_CanteenManagement
 
         private void BtnLogin_Click(object sender, EventArgs e)
         {
-            Form1 f = new Form1();
-            this.Hide();
-            f.ShowDialog();
-            this.Show();
+            string userName = txbUsername.Text;
+            string password = txbPassword.Text;
+            if (Login(userName, password))
+            {
+                fMain f = new fMain();
+                this.Hide();
+                f.ShowDialog();
+                this.Show();
+            }
+            else{
+                MessageBox.Show("Sai tên tài khoản hoặc mật khẩu");
+            }
+
+        }
+
+        bool Login(string userName, string password)
+        {
+            return AccountDAO.Instance.Login(userName, password);
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace wf_CanteenManagement
 {
-    partial class Form1
+    partial class fMain
     {
         /// <summary>
         /// Required designer variable.
@@ -37,13 +37,13 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.lsvBill = new System.Windows.Forms.ListView();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.btnCheckout = new System.Windows.Forms.Button();
             this.btnAddFood = new System.Windows.Forms.Button();
             this.cbFood = new System.Windows.Forms.ComboBox();
             this.cbCategory = new System.Windows.Forms.ComboBox();
             this.panel4 = new System.Windows.Forms.Panel();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.flpTable = new System.Windows.Forms.FlowLayoutPanel();
-            this.btnCheckout = new System.Windows.Forms.Button();
+            this.flpFoodImgList = new System.Windows.Forms.FlowLayoutPanel();
             this.menuStrip1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -87,14 +87,14 @@
             // thôngTinTàiKhoảnToolStripMenuItem
             // 
             this.thôngTinTàiKhoảnToolStripMenuItem.Name = "thôngTinTàiKhoảnToolStripMenuItem";
-            this.thôngTinTàiKhoảnToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.thôngTinTàiKhoảnToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
             this.thôngTinTàiKhoảnToolStripMenuItem.Text = "Thông tin tài khoản";
             this.thôngTinTàiKhoảnToolStripMenuItem.Click += new System.EventHandler(this.ThôngTinTàiKhoảnToolStripMenuItem_Click);
             // 
             // đăngXuấtToolStripMenuItem
             // 
             this.đăngXuấtToolStripMenuItem.Name = "đăngXuấtToolStripMenuItem";
-            this.đăngXuấtToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.đăngXuấtToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
             this.đăngXuấtToolStripMenuItem.Text = "Đăng xuất";
             this.đăngXuấtToolStripMenuItem.Click += new System.EventHandler(this.ĐăngXuấtToolStripMenuItem_Click);
             // 
@@ -122,6 +122,15 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(391, 81);
             this.panel3.TabIndex = 1;
+            // 
+            // btnCheckout
+            // 
+            this.btnCheckout.Location = new System.Drawing.Point(301, 15);
+            this.btnCheckout.Name = "btnCheckout";
+            this.btnCheckout.Size = new System.Drawing.Size(75, 48);
+            this.btnCheckout.TabIndex = 7;
+            this.btnCheckout.Text = "Thanh toán";
+            this.btnCheckout.UseVisualStyleBackColor = true;
             // 
             // btnAddFood
             // 
@@ -176,36 +185,27 @@
             0,
             0});
             // 
-            // flpTable
+            // flpFoodImgList
             // 
-            this.flpTable.Location = new System.Drawing.Point(12, 27);
-            this.flpTable.Name = "flpTable";
-            this.flpTable.Size = new System.Drawing.Size(379, 411);
-            this.flpTable.TabIndex = 7;
+            this.flpFoodImgList.Location = new System.Drawing.Point(12, 27);
+            this.flpFoodImgList.Name = "flpFoodImgList";
+            this.flpFoodImgList.Size = new System.Drawing.Size(379, 411);
+            this.flpFoodImgList.TabIndex = 7;
             // 
-            // btnCheckout
-            // 
-            this.btnCheckout.Location = new System.Drawing.Point(301, 15);
-            this.btnCheckout.Name = "btnCheckout";
-            this.btnCheckout.Size = new System.Drawing.Size(75, 48);
-            this.btnCheckout.TabIndex = 7;
-            this.btnCheckout.Text = "Thanh toán";
-            this.btnCheckout.UseVisualStyleBackColor = true;
-            // 
-            // Form1
+            // fMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.flpTable);
+            this.Controls.Add(this.flpFoodImgList);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Name = "Form1";
+            this.Name = "fMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form1";
+            this.Text = "Trang chính";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.panel2.ResumeLayout(false);
@@ -234,6 +234,6 @@
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.Button btnCheckout;
-        private System.Windows.Forms.FlowLayoutPanel flpTable;
+        private System.Windows.Forms.FlowLayoutPanel flpFoodImgList;
     }
 }

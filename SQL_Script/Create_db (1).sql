@@ -18,6 +18,17 @@ USE master
 CREATE DATABASE [Canteen]
 GO
 USE Canteen 
+
+-- Table ACcount --
+CREATE TABLE Account
+(
+	UserName NVARCHAR(100) PRIMARY KEY,	
+	DisplayName NVARCHAR(100) NOT NULL DEFAULT N'User',
+	PassWord NVARCHAR(1000) NOT NULL DEFAULT 0,
+	AccType INT NOT NULL  DEFAULT 0 -- 1: admin && 0: staff
+)
+GO
+
 -- -----------------------------------------------------
 -- Table `mydb`.`NhanVien`
 -- -----------------------------------------------------
