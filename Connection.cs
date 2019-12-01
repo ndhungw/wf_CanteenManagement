@@ -31,7 +31,8 @@ namespace wf_CanteenManagement
         SqlConnection conn;
         SqlDataAdapter adapter;
         SqlCommand cmd;
-        string path_connect = @"Data Source=DESKTOP-RNV8JUS\SQLEXPRESS;Initial Catalog=Canteen;Integrated Security=True";
+        //string path_connect = @"Data Source=DESKTOP-RNV8JUS\SQLEXPRESS;Initial Catalog=Canteen;Integrated Security=True";
+        string path_connect = @"Data Source=.\SQLEXPRESS;Initial Catalog=Canteen;Integrated Security=True";
         DataSet ds = new DataSet();
 
         public DataSet getData(string sql)
