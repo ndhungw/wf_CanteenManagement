@@ -50,7 +50,6 @@ CREATE TABLE HoaDon (
   [NgayLap] DATETIME2(0) NULL,
   [TongTien] INT CHECK ([TongTien] > 0) NULL,
   [ThanhToan] SMALLINT NULL,
-  [KhachHang_idKhachHang] INT NOT NULL,
   [NhanVien_idNhanVien] INT NOT NULL,
   PRIMARY KEY ([idHoaDon]),
   CONSTRAINT [fk_HoaDon_NhanVien1]
