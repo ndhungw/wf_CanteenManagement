@@ -1,5 +1,9 @@
 ﻿use Canteen
 
+--Table Account
+INSERT INTO Account(UserName, PassWord, DisplayName, AccType)	VALUES('admin','1234', 'ADMINISTRATOR', 1);
+INSERT INTO Account(UserName, PassWord, DisplayName, AccType)	VALUES('alaska123','123', 'Tran Quang Khai', 0);
+
 --- Table NhanVien
 INSERT INTO NhanVien(HoTen, NgaySinh)	VALUES(N'Trần Phúc Lộc','09/10/1978')
 INSERT INTO NhanVien(HoTen, NgaySinh)	 VALUES(N'Đoàn Văn Hậu','05/17/1999')
