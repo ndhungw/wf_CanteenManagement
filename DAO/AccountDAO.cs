@@ -26,5 +26,7 @@ namespace wf_CanteenManagement.DAO
             DataTable result = DataProvider.Instance.ExecQuery(query, new object[] { userName, password });
             return result.Rows.Count >0 ;
         }
+
+       
     }
 }

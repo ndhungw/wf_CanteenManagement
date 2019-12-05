@@ -20,16 +20,19 @@ namespace wf_CanteenManagement
 
         private void BtnExit_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            DialogResult kg = MessageBox.Show("Bạn muốn thoát chương trình?", "Thông báo",
+                MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+            if (kg==DialogResult.OK)
+                Application.Exit();
         }
 
         private void FLogin_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (MessageBox.Show("Thoát chương trình?","Thông báo",MessageBoxButtons.OKCancel) 
-                != System.Windows.Forms.DialogResult.OK)
-            {
-                e.Cancel = true;
-            }
+            //if (MessageBox.Show("Thoát chương trình?","Thông báo",MessageBoxButtons.OKCancel, MessageBoxIcon.Question) 
+            //    != System.Windows.Forms.DialogResult.OK)
+            //{
+            //    e.Cancel = true;
+            //}
         }
 
         private void BtnLogin_Click(object sender, EventArgs e)
