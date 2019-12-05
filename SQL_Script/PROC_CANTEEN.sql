@@ -84,6 +84,8 @@ AS
 											FROM HoaDon AS HD 
 											WHERE HD.NgayLap BETWEEN @BEGIN AND @END)  AS HD1 ON HD1.idHoaDon=CT.HoaDon_idHoaDon
 GO
+EXEC Tim_Hoa_Don_Theo_Ngay '2019/10/8','2019/10/9'
+
 
 --Tránh lỗi SQL Injection như ví dụ sau:
 --<		SELECT * FROM dbo.Account WHERE UserName = '' AND PassWord = N'' OR 1=1--'		>

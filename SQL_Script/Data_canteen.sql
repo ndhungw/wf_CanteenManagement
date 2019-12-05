@@ -17,10 +17,11 @@ INSERT INTO NhanVien(HoTen, NgaySinh)	 VALUES(N'Nguyễn Tiến Linh','01/06/198
 
 
 ---Table HoaDon
-INSERT INTO HoaDon(NgayLap,TongTien,NhanVien_idNhanVien)	 VALUES('9/10/2019',25000,'001' )
-INSERT INTO HoaDon(NgayLap,TongTien,NhanVien_idNhanVien)    VALUES('9/10/2019',40000,'001' )
-INSERT INTO HoaDon(NgayLap,TongTien,NhanVien_idNhanVien)    VALUES('9/11/2019',55000,'002' )
-INSERT INTO HoaDon(NgayLap,TongTien,NhanVien_idNhanVien)    VALUES('9/12/2019',20000,'002' )
+INSERT INTO HoaDon(NgayLap,TongTien,NhanVien_idNhanVien)	VALUES('2019/10/9',25000,'001')
+INSERT INTO HoaDon(NgayLap,TongTien,NhanVien_idNhanVien)    VALUES('2019/10/13',40000,'001')
+INSERT INTO HoaDon(NgayLap,TongTien,NhanVien_idNhanVien)    VALUES('2019/11/9',55000,'002')
+INSERT INTO HoaDon(NgayLap,TongTien,NhanVien_idNhanVien)    VALUES('2019/12/19',20000,'002')
+
 INSERT INTO HoaDon(NgayLap,TongTien,NhanVien_idNhanVien)    VALUES('9/12/2019',25000,'005' )
 INSERT INTO HoaDon(NgayLap,TongTien,NhanVien_idNhanVien)    VALUES('9/10/2019',25000,'005' )
 INSERT INTO HoaDon(NgayLap,TongTien,NhanVien_idNhanVien)    VALUES('9/10/2019',30000,'001' )

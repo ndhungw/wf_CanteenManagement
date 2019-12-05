@@ -20,6 +20,10 @@ namespace wf_CanteenManagement
 
             loadFoodList();
             loadData();
+
+            dtgvBill.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dtgvFood.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dtgvCategory.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
         void loadFoodList()
@@ -71,9 +75,19 @@ namespace wf_CanteenManagement
         {
             string fromDate = dtpkFromDate.Value.ToShortDateString();
             string toDate = dtpkToDate.Value.ToShortDateString();
-            
             string query = "Tim_Hoa_Don_Theo_Ngay @BEGIN , @END";
+
             dtgvBill.DataSource = DataProvider.Instance.ExecQuery(query, new Object[] { fromDate, toDate } );
+        }
+
+        private void BtnSearchFood_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtnShowCategory_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
