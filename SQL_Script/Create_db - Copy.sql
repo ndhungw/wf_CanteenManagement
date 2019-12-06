@@ -47,7 +47,6 @@ CREATE TABLE MonAn (
   [idMonAn] INT NOT NULL IDENTITY(1,1),
   [Ten] NVARCHAR(45) NULL,
   [Gia] INT CHECK ([Gia] > 0) NULL,
-  [idLoaiMonAn] INT NOT NULL,--them 7/12/2019
   [MieuTa] NVARCHAR(45) NULL,
   [HinhAnh] NVARCHAR(256) NULL,
   PRIMARY KEY ([idMonAn]))

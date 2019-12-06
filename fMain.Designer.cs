@@ -203,6 +203,7 @@
             this.cbCategory.Name = "cbCategory";
             this.cbCategory.Size = new System.Drawing.Size(261, 21);
             this.cbCategory.TabIndex = 3;
+            this.cbCategory.SelectedIndexChanged += new System.EventHandler(this.CbCategory_SelectedIndexChanged);
             // 
             // panel4
             // 
@@ -234,6 +235,7 @@
             // 
             // flpFoodImgList
             // 
+            this.flpFoodImgList.AutoSize = true;
             this.flpFoodImgList.Location = new System.Drawing.Point(12, 27);
             this.flpFoodImgList.Name = "flpFoodImgList";
             this.flpFoodImgList.Size = new System.Drawing.Size(576, 562);
