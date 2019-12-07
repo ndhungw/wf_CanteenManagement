@@ -26,15 +26,34 @@ namespace wf_CanteenManagement.DAO
 
         private FoodDAO() { }
 
+        //public List<Food> GetFoodByCategoryID(int id)
+        //{
+        //    List<Food> list = new List<Food>();
+
+        //    string query = "SELECT * FROM dbo.MonAn WHERE idLoaiMonAn = " + id;
+
+        //    DataTable data = DataProvider.Instance.ExecQuery(query);
+
+        //    foreach(DataRow item in data.Rows)
+        //    {
+        //        Food food = new Food(item);
+        //        list.Add(food);
+        //    }
+
+        //    return list;
+        //}
+
         public List<Food> GetFoodByCategoryID(int id)
         {
             List<Food> list = new List<Food>();
 
-            string query = "SELECT * FROM dbo.MonAn WHERE idLoaiMonAn = " + id;
+            string query =  "SELECT MA.* " +
+                            "FROM MonAn MA, MonAn_thuoc_LoaiMon_ MATLM WHERE MATLM.LoaiMonAn_idLoaiMonAn = " + id +
+                            "AND MA.idMonAn = MATLM.MonAn_idMonAn";
 
             DataTable data = DataProvider.Instance.ExecQuery(query);
 
-            foreach(DataRow item in data.Rows)
+            foreach (DataRow item in data.Rows)
             {
                 Food food = new Food(item);
                 list.Add(food);

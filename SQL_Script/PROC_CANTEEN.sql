@@ -57,25 +57,25 @@ CREATE TYPE MonAn_Temp AS TABLE(
 	idMon INT,
 	Soluong INT)
 GO
-CREATE TYPE TEMP AS TABLE(
+CREATE TYPE ID_TEMP AS TABLE(
 	IdMon INT)
 GO
-CREATE PROC Them_Hoa_Don @NHANVIEN INT, @DSMON MonAn_Temp READONLY--Nhập vào một bảng gồm món ăn và số lượng
+CREATE PROC Them_Hoa_Don @IdNHANVIEN INT, @DSMON MonAn_Temp READONLY--Nhập vào một bảng gồm món ăn và số lượng
 AS
-	DECLARE @NGAYLAP DATETIME,@TONGTIEN INT,@IDMON INT,@TEMP1 TEMP
+	DECLARE @NGAYLAP DATETIME,@TONGTIEN INT,@IdMON INT,@IdMONTABLE ID_TEMP
 	SET @NGAYLAP=GETDATE()
 
 	SET @TONGTIEN=(SELECT SUM(MA.Gia*DS.Soluong)
 	FROM @DSMON AS DS INNER JOIN MonAn AS MA ON DS.idMon=MA.idMonAn)
 
-	INSERT INTO HoaDon(NhanVien_idNhanVien,NgayLap,TongTien) VALUES(@NHANVIEN,@NGAYLAP,@TONGTIEN)
+	INSERT INTO HoaDon(NhanVien_idNhanVien,NgayLap,TongTien) VALUES(@IdNHANVIEN,@NGAYLAP,@TONGTIEN)
 
-	SET @IDMON=@@IDENTITY
-	INSERT INTO @TEMP1(IdMon) VALUES (@IDMON)
+	SET @IdMON=@@IDENTITY
+	INSERT INTO @IdMONTABLE(IdMon) VALUES (@IdMON)
 
 	INSERT INTO ChiTietHoaDon(HoaDon_idHoaDon,MonAn_idMonAn,SoLuong)
 	(SELECT T.IdMon,DS.idMon,DS.Soluong
-	FROM @TEMP1 AS T,@DSMON AS DS)
+	FROM @IdMONTABLE AS T,@DSMON AS DS)
 GO											
 CREATE PROC Tim_Hoa_Don_Theo_Ngay @BEGIN DATETIME,@END DATETIME
 AS
@@ -84,16 +84,22 @@ AS
 											FROM HoaDon AS HD 
 											WHERE HD.NgayLap BETWEEN @BEGIN AND @END)  AS HD1 ON HD1.idHoaDon=CT.HoaDon_idHoaDon
 GO
-EXEC Tim_Hoa_Don_Theo_Ngay '2019/10/8','2019/10/9'
-
-
---Tránh lỗi SQL Injection như ví dụ sau:
---<		SELECT * FROM dbo.Account WHERE UserName = '' AND PassWord = N'' OR 1=1--'		>
-CREATE PROC USER_Login
-@userName nvarchar(100), @passWord nvarchar(100)
+CREATE PROC Them_Hoa_Don_Tung_Mon @IdNHANVIEN INT,@IdMONAN INT,@SOLUONG INT,@IdHOADON_OUT INT OUTPUT--Trả về id hóa đơn để lần sau thêm các món vào chi tiết hóa đơn
+--Thêm hóa đơn lần đầu
 AS
-BEGIN
-	SELECT * FROM dbo.Account WHERE UserName = @userName AND PassWord = @passWord
-END
+	DECLARE @NGAYLAP DATETIME,@TONGTIEN INT,@IdHOADON INT
+	SET @NGAYLAP=GETDATE()
+	SET @TONGTIEN=(SELECT MA.Gia*@SOLUONG FROM MonAn AS MA WHERE MA.idMonAn=@IdMONAN)
+	INSERT INTO HoaDon(NhanVien_idNhanVien,NgayLap,TongTien) VALUES (@IdNHANVIEN,@NGAYLAP,@TONGTIEN)
+	SET @IdHOADON=@@IDENTITY
+	INSERT INTO ChiTietHoaDon(HoaDon_idHoaDon,MonAn_idMonAn,SoLuong) VALUES (@IdHOADON,@IdMONAN,@SOLUONG)
+	SELECT @IdHOADON_OUT=@IdHOADON
+	print(@idhoadon)
 GO
---EXEC USER_Login 'admin', '1234'
+CREATE PROC Them_CT_Hoa_Don_Tung_Mon @IdHOADON INT,@IdMONAN INT,@SOLUONG INT
+AS
+	INSERT INTO ChiTietHoaDon(HoaDon_idHoaDon,MonAn_idMonAn,SoLuong) VALUES(@IdHOADON,@IdMONAN,@SOLUONG)
+	UPDATE HoaDon
+	SET TongTien+=(SELECT MA.Gia*@SOLUONG FROM MONAN AS MA WHERE MA.idMonAn=@IdMONAN)
+	WHERE idHoaDon=@IdHOADON
+GO

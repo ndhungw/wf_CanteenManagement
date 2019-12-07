@@ -85,5 +85,14 @@ namespace wf_CanteenManagement
 
             LoadFoodListByCategoryID(id);
         }
+
+        private void BtnAddFood_Click(object sender, EventArgs e)
+        {
+            int idBill = BillDAO.Instance.GetMaxIDBill();
+            int foodID = (cbFood.SelectedItem as Food).ID;
+            int count = (int)nmFoodCount.Value;
+
+            BillDAO.Instance.InsertBill(idBill, foodID, count);
+        }
     }
 }

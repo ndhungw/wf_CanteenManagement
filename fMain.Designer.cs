@@ -48,12 +48,12 @@
             this.cbFood = new System.Windows.Forms.ComboBox();
             this.cbCategory = new System.Windows.Forms.ComboBox();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.nmFoodCount = new System.Windows.Forms.NumericUpDown();
             this.flpFoodImgList = new System.Windows.Forms.FlowLayoutPanel();
             this.menuStrip1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nmFoodCount)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -187,6 +187,7 @@
             this.btnAddFood.TabIndex = 5;
             this.btnAddFood.Text = "Thêm món";
             this.btnAddFood.UseVisualStyleBackColor = true;
+            this.btnAddFood.Click += new System.EventHandler(this.BtnAddFood_Click);
             // 
             // cbFood
             // 
@@ -207,7 +208,7 @@
             // 
             // panel4
             // 
-            this.panel4.Controls.Add(this.numericUpDown1);
+            this.panel4.Controls.Add(this.nmFoodCount);
             this.panel4.Controls.Add(this.btnAddFood);
             this.panel4.Controls.Add(this.cbFood);
             this.panel4.Controls.Add(this.cbCategory);
@@ -216,18 +217,18 @@
             this.panel4.Size = new System.Drawing.Size(458, 83);
             this.panel4.TabIndex = 2;
             // 
-            // numericUpDown1
+            // nmFoodCount
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(293, 34);
-            this.numericUpDown1.Minimum = new decimal(new int[] {
+            this.nmFoodCount.Location = new System.Drawing.Point(293, 34);
+            this.nmFoodCount.Minimum = new decimal(new int[] {
             100,
             0,
             0,
             -2147483648});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(55, 20);
-            this.numericUpDown1.TabIndex = 6;
-            this.numericUpDown1.Value = new decimal(new int[] {
+            this.nmFoodCount.Name = "nmFoodCount";
+            this.nmFoodCount.Size = new System.Drawing.Size(55, 20);
+            this.nmFoodCount.TabIndex = 6;
+            this.nmFoodCount.Value = new decimal(new int[] {
             1,
             0,
             0,
@@ -260,7 +261,7 @@
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.panel4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nmFoodCount)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -280,7 +281,7 @@
         private System.Windows.Forms.ComboBox cbFood;
         private System.Windows.Forms.ComboBox cbCategory;
         private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.NumericUpDown nmFoodCount;
         private System.Windows.Forms.Button btnCheckout;
         private System.Windows.Forms.FlowLayoutPanel flpFoodImgList;
         private System.Windows.Forms.ColumnHeader columnHeader1;
