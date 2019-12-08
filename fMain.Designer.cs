@@ -39,7 +39,6 @@
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.panel3 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -50,10 +49,12 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.nmFoodCount = new System.Windows.Forms.NumericUpDown();
             this.flpFoodImgList = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnNewBill = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nmFoodCount)).BeginInit();
+            this.flpFoodImgList.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -109,8 +110,7 @@
             this.columnHeader1,
             this.columnHeader2,
             this.columnHeader3,
-            this.columnHeader4,
-            this.columnHeader5});
+            this.columnHeader4});
             this.lsvBill.GridLines = true;
             this.lsvBill.HideSelection = false;
             this.lsvBill.Location = new System.Drawing.Point(604, 116);
@@ -122,27 +122,22 @@
             // 
             // columnHeader1
             // 
-            this.columnHeader1.Text = "Mã món ăn";
+            this.columnHeader1.Text = "Tên món ăn";
             this.columnHeader1.Width = 69;
             // 
             // columnHeader2
             // 
-            this.columnHeader2.Text = "Tên món ăn";
+            this.columnHeader2.Text = "Số lượng";
             this.columnHeader2.Width = 127;
             // 
             // columnHeader3
             // 
-            this.columnHeader3.Text = "Số lượng";
+            this.columnHeader3.Text = "Đơn giá";
             // 
             // columnHeader4
             // 
-            this.columnHeader4.Text = "Đơn giá";
+            this.columnHeader4.Text = "Thành tiền";
             this.columnHeader4.Width = 90;
-            // 
-            // columnHeader5
-            // 
-            this.columnHeader5.Text = "Thành tiền";
-            this.columnHeader5.Width = 100;
             // 
             // panel3
             // 
@@ -237,10 +232,21 @@
             // flpFoodImgList
             // 
             this.flpFoodImgList.AutoSize = true;
+            this.flpFoodImgList.Controls.Add(this.btnNewBill);
             this.flpFoodImgList.Location = new System.Drawing.Point(12, 27);
             this.flpFoodImgList.Name = "flpFoodImgList";
             this.flpFoodImgList.Size = new System.Drawing.Size(576, 562);
             this.flpFoodImgList.TabIndex = 7;
+            // 
+            // btnNewBill
+            // 
+            this.btnNewBill.Location = new System.Drawing.Point(3, 3);
+            this.btnNewBill.Name = "btnNewBill";
+            this.btnNewBill.Size = new System.Drawing.Size(96, 48);
+            this.btnNewBill.TabIndex = 7;
+            this.btnNewBill.Text = "Tạo hóa đơn mới";
+            this.btnNewBill.UseVisualStyleBackColor = true;
+            this.btnNewBill.Click += new System.EventHandler(this.BtnNewBill_Click);
             // 
             // fMain
             // 
@@ -262,6 +268,7 @@
             this.panel3.PerformLayout();
             this.panel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.nmFoodCount)).EndInit();
+            this.flpFoodImgList.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -283,13 +290,13 @@
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.NumericUpDown nmFoodCount;
         private System.Windows.Forms.Button btnCheckout;
-        private System.Windows.Forms.FlowLayoutPanel flpFoodImgList;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.ColumnHeader columnHeader4;
-        private System.Windows.Forms.ColumnHeader columnHeader5;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.FlowLayoutPanel flpFoodImgList;
+        private System.Windows.Forms.Button btnNewBill;
     }
 }
