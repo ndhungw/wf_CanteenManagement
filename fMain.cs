@@ -14,9 +14,12 @@ namespace wf_CanteenManagement
 {
     public partial class fMain : Form
     {
-        public fMain()
+        private Session sessionInfo = null;
+        public fMain(Session sessionInfo)
         {
             InitializeComponent();
+
+            this.sessionInfo = sessionInfo;
 
             LoadCategory();
         }
@@ -45,7 +48,7 @@ namespace wf_CanteenManagement
 
         private void ThôngTinTàiKhoảnToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            fAccountProfile f = new fAccountProfile();
+            fAccountProfile f = new fAccountProfile(sessionInfo);
             f.ShowDialog();
 
         }
