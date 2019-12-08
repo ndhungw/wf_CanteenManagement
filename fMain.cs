@@ -79,8 +79,8 @@ namespace wf_CanteenManagement
 
         void ShowBill(int idBill)
         {
-            lsvBill.Items.Clear();
             List<DTO.BillView> listMenu = BillViewDAO.Instance.GetListMenuByBill(idBill);
+            int totalPriceOfBill = 0;
             foreach(DTO.BillView item in listMenu)
             {
                 ListViewItem lsvItem = new ListViewItem(item.FoodName.ToString());
@@ -88,13 +88,14 @@ namespace wf_CanteenManagement
                 lsvItem.SubItems.Add(item.SinglePrice.ToString());
                 lsvItem.SubItems.Add(item.TotalPrice.ToString());
                 lsvBill.Items.Add(lsvItem);
+                totalPriceOfBill += item.TotalPrice;
             }
+            txbToTalPriceOfBill.Text = totalPriceOfBill.ToString();
         }
 
         private void BtnAddFood_Click(object sender, EventArgs e)
         {
-            BillDAO.Instance.InsertBill();//Tạo bill mới
-
+            lsvBill.Items.Clear();
             int idBill = BillDAO.Instance.GetMaxIDBill();//Lấy idbill mới
             int foodID = (cbFood.SelectedItem as Food).ID;
             int count = (int)nmFoodCount.Value;
@@ -104,6 +105,11 @@ namespace wf_CanteenManagement
             ShowBill(idBill);
         }
 
+        private void BtnNewBill_Click(object sender, EventArgs e)
+        {
+            BillDAO.Instance.InsertBill();//Tạo bill mới
+            lsvBill.Items.Clear();
+        }
 
     }
 }
