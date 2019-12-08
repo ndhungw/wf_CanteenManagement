@@ -21,7 +21,6 @@ namespace wf_CanteenManagement
             LoadCategory();
         }
 
-        /*Method chon mon them mon an*/
         void LoadCategory()
         {
             List<Category> listCategory = CategoryDAO.Instance.GetListCategory();
@@ -38,19 +37,7 @@ namespace wf_CanteenManagement
         }
         //
 
-        //delete after
-        void LoadTable()
-        {
-            List<Table> tableList = TableDAO.Instance.LoadTableList();
-
-            foreach (Table item in tableList)
-            {
-                Button btn = new Button() { Width = 50, Height = 50 };
-
-
-            }
-        }
-
+        
         private void ĐăngXuấtToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -80,19 +67,40 @@ namespace wf_CanteenManagement
             {
                 return;
             }
+
             Category selected = cb.SelectedItem as Category;
             id = selected.ID;
 
             LoadFoodListByCategoryID(id);
         }
 
+        void ShowBill(int idBill)
+        {
+            lsvBill.Items.Clear();
+            List<DTO.BillView> listMenu = BillViewDAO.Instance.GetListMenuByBill(idBill);
+            foreach(DTO.BillView item in listMenu)
+            {
+                ListViewItem lsvItem = new ListViewItem(item.FoodName.ToString());
+                lsvItem.SubItems.Add(item.Count.ToString());
+                lsvItem.SubItems.Add(item.SinglePrice.ToString());
+                lsvItem.SubItems.Add(item.TotalPrice.ToString());
+                lsvBill.Items.Add(lsvItem);
+            }
+        }
+
         private void BtnAddFood_Click(object sender, EventArgs e)
         {
-            int idBill = BillDAO.Instance.GetMaxIDBill();
+            BillDAO.Instance.InsertBill();//Tạo bill mới
+
+            int idBill = BillDAO.Instance.GetMaxIDBill();//Lấy idbill mới
             int foodID = (cbFood.SelectedItem as Food).ID;
             int count = (int)nmFoodCount.Value;
 
-            BillDAO.Instance.InsertBill(idBill, foodID, count);
+            BillInfoDAO.Instance.InsertBillInfo(idBill, foodID, count);
+
+            ShowBill(idBill);
         }
+
+
     }
 }

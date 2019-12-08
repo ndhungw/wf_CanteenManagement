@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using wf_CanteenManagement.DTO;
 
 namespace wf_CanteenManagement.DAO
 {
@@ -30,20 +32,9 @@ namespace wf_CanteenManagement.DAO
             }
         }
 
-        public void InsertBill(int idBill, int idFood, int count)
+        public void InsertBill()
         {
-            //-testing
-            DataProvider.Instance.ExecNonQuery("exec InsertBill @idHoaDon , @idMonAn , @soLuongMonAn", new object[] { idBill, idFood, count});
-
-            bool isExistBill = false;
-            //Bước 1: Kiểm tra hóa đơn đã tồn tại
-            if(isExistBill == false)
-            {
-                //Thực hiện gọi hàm thêm bình thường
-                DataProvider.Instance.ExecNonQuery("exec Them_Hoa_Don_Tung_Mon @idHoaDon , @idMonAn , @soLuongMonAn", new object[] { idBill, idFood, count });
-            }
-            //Bước 2:
-            //-endtesting
+            DataProvider.Instance.ExecNonQuery("EXEC Them_Hoa_Don @IdNhanVien", new object[] { 1 });
         }
     }
 }
