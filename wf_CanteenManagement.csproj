@@ -60,6 +60,7 @@
     <Compile Include="DTO\Bill.cs" />
     <Compile Include="DTO\Food.cs" />
     <Compile Include="DTO\BillView.cs" />
+    <Compile Include="DTO\Session.cs" />
     <Compile Include="fAccountProfile.cs">
       <SubType>Form</SubType>
     </Compile>

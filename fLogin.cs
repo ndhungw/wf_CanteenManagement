@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using wf_CanteenManagement.DAO;
+using wf_CanteenManagement.DTO;
 
 namespace wf_CanteenManagement
 {
@@ -37,11 +38,15 @@ namespace wf_CanteenManagement
 
         private void BtnLogin_Click(object sender, EventArgs e)
         {
-            string userName = txbUsername.Text;
+            string username = txbUsername.Text;
             string password = txbPassword.Text;
-            if (Login(userName, password))
+
+            if (Login(username, password))
             {
-                fMain f = new fMain();
+                var query = $"SELECT * FROM dbo.Account WHERE UserName = '{username}'";
+                var data = DataProvider.Instance.ExecQuery(query);
+
+                fMain f = new fMain(new Session(username, password, data.Rows[0][1].ToString()));
                 this.Hide();
                 f.ShowDialog();
                 this.Show();
