@@ -60,7 +60,7 @@ CREATE TABLE MonAn (
 CREATE TABLE HoaDon (
   [idHoaDon] INT NOT NULL IDENTITY(1,1),
   [NgayLap] DATETIME2(0) NULL,
-  [TongTien] INT CHECK ([TongTien] > 0) NULL,
+  [TongTien] INT NULL,
   [NhanVien_idNhanVien] INT NOT NULL,
   PRIMARY KEY ([idHoaDon]),
   CONSTRAINT [fk_HoaDon_NhanVien1]
@@ -71,7 +71,6 @@ CREATE TABLE HoaDon (
 ;
 
 CREATE INDEX fk_HoaDon_NhanVien1_idx ON HoaDon ([NhanVien_idNhanVien] ASC);
-
 
 -- -----------------------------------------------------
 -- Table `mydb`.`ChiTietHoaDon`

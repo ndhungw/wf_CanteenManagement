@@ -196,7 +196,6 @@
             this.cbFood.Name = "cbFood";
             this.cbFood.Size = new System.Drawing.Size(205, 21);
             this.cbFood.TabIndex = 4;
-            this.cbFood.SelectedIndexChanged += new System.EventHandler(this.CbFood_SelectedIndexChanged);
             // 
             // cbCategory
             // 
