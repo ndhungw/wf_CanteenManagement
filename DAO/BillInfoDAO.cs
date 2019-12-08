@@ -37,8 +37,12 @@ namespace wf_CanteenManagement.DAO
 
         public void InsertBillInfo(int idBill, int idFood, int count)
         {
+            DataProvider.Instance.ExecNonQuery("EXEC Them_Hoa_Don_Tung_Mon @IdHoaDon , @IdMonAn , @SoLuongThemVao , @IdNhanVien", new object[] { idBill, idFood, count, 1 });
+        }
 
-            DataProvider.Instance.ExecNonQuery("exec Them_Hoa_Don_Tung_Mon @IdHoaDon , @IdMonAn , @SoLuongThemVao , @IdNhanVien", new object[] { idBill, idFood, count, 1 });
+        public int CheckBillInfoExists(int idBill)
+        {
+            return (int)DataProvider.Instance.ExecScalar("SELECT COUNT(*) FROM dbo.ChiTietHoaDon WHERE HoaDon_idHoaDon = " + idBill);
         }
     }
 }

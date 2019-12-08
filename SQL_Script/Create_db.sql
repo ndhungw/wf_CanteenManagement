@@ -75,6 +75,24 @@ CREATE INDEX fk_HoaDon_NhanVien1_idx ON HoaDon ([NhanVien_idNhanVien] ASC);
 -- -----------------------------------------------------
 -- Table `mydb`.`ChiTietHoaDon`
 -- -----------------------------------------------------
+--CREATE TABLE ChiTietHoaDon (
+--  [HoaDon_idHoaDon] INT NOT NULL,
+--  [MonAn_idMonAn] INT NOT NULL,
+--  [SoLuong] INT CHECK ([SoLuong] > 0) NULL,
+--  PRIMARY KEY ([HoaDon_idHoaDon], [MonAn_idMonAn]),
+--  CONSTRAINT [fk_HoaDon_has_MonAn_HoaDon1]
+--    FOREIGN KEY ([HoaDon_idHoaDon])
+--    REFERENCES HoaDon ([idHoaDon])
+--    ON DELETE NO ACTION
+--    ON UPDATE NO ACTION,
+--  CONSTRAINT [fk_HoaDon_has_MonAn_MonAn1]
+--    FOREIGN KEY ([MonAn_idMonAn])
+--    REFERENCES MonAn ([idMonAn])
+--    ON DELETE NO ACTION
+--    ON UPDATE NO ACTION)
+--;
+
+--EDIT481
 CREATE TABLE ChiTietHoaDon (
   [HoaDon_idHoaDon] INT NOT NULL,
   [MonAn_idMonAn] INT NOT NULL,
@@ -82,9 +100,7 @@ CREATE TABLE ChiTietHoaDon (
   PRIMARY KEY ([HoaDon_idHoaDon], [MonAn_idMonAn]),
   CONSTRAINT [fk_HoaDon_has_MonAn_HoaDon1]
     FOREIGN KEY ([HoaDon_idHoaDon])
-    REFERENCES HoaDon ([idHoaDon])
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    REFERENCES HoaDon ([idHoaDon]),
   CONSTRAINT [fk_HoaDon_has_MonAn_MonAn1]
     FOREIGN KEY ([MonAn_idMonAn])
     REFERENCES MonAn ([idMonAn])

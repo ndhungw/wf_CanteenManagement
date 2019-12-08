@@ -1,6 +1,117 @@
 ﻿USE Canteen
 GO
 
+--check tài khoản login
+CREATE PROC USER_Login
+@userName nvarchar(100), @passWord nvarchar(100)
+AS
+BEGIN
+	SELECT * FROM dbo.Account WHERE UserName = @userName AND PassWord = @passWord
+END
+GO
+
+--Hủy hóa đơn đang được tạo (đang dược thêm món, đã có chi tiết hóa đơn được tạo)
+CREATE PROC Huy_Hoa_Don_Dang_Tao @IdHoaDon INT
+AS
+BEGIN
+	DELETE dbo.ChiTietHoaDon WHERE HoaDon_idHoaDon = @IdHoaDon--Xóa chi tiết hóa đơn trước
+	DELETE dbo.HoaDon WHERE idHoaDon = @IdHoaDon--Xóa hóa đơn hóa đơn
+END
+GO
+
+--Thêm [Hóa Đơn]
+CREATE PROC Them_Hoa_Don @idNhanVien INT
+AS
+BEGIN
+	INSERT dbo.HoaDon VALUES(GETDATE(),0,@idNhanVien)
+END
+GO
+
+CREATE PROC Them_Hoa_Don_Tung_Mon @IdHoaDon INT, @IdMonAn INT, @SoLuongThemVao INT, @IdNhanVien INT
+AS
+	DECLARE @LaHoaDonTonTai INT = 0
+	SELECT @LaHoaDonTonTai = idHoaDon
+	FROM dbo.HoaDon
+	WHERE idHoaDon = @IdHoaDon
+
+	DECLARE @SoLuongHienCo INT = 0
+	SELECT @SoLuongHienCo = SoLuong
+	FROM dbo.ChiTietHoaDon
+	WHERE HoaDon_idHoaDon = @IdHoaDon AND MonAn_idMonAn = @IdMonAn
+	
+	DECLARE @SoLuongMoi INT = @SoLuongHienCo + @SoLuongThemVao --Tính số lượng sau cùng sẽ lưu sau lần thêm này
+	
+	DECLARE @TongTienHienTai INT = 0
+	SELECT @TongTienHienTai = TongTien
+	FROM dbo.HoaDon
+	WHERE idHoaDon = @IdHoaDon
+
+	DECLARE @TongTienMoi INT
+
+	IF (@LaHoaDonTonTai>0)--*Hóa đơn tồn tại
+	BEGIN
+		IF(@SoLuongHienCo>0)--Hóa đơn tồn tại, *món này tồn tại
+		BEGIN
+			IF (@SoLuongMoi > 0)--Hóa đơn tồn tại, món tồn tại, *số lượng sau cùng hợp lệ
+			BEGIN--Tăng số lượng ở chi tiết hóa đơn, tăng tổng tiền ở hóa đơn, cập nhật ngày của hóa đơn
+				UPDATE dbo.ChiTietHoaDon SET SoLuong = @SoLuongMoi
+				WHERE HoaDon_idHoaDon = @IdHoaDon AND MonAn_idMonAn = @IdMonAn
+
+				SET @TongTienMoi= @TongTienHienTai + (SELECT MA.Gia
+											FROM dbo.MonAn AS MA 
+											WHERE MA.idMonAn=@IdMonAn)*@SoLuongThemVao
+				UPDATE dbo.HoaDon SET TongTien = @TongTienMoi, NgayLap = GETDATE()
+				WHERE idHoaDon = @IdHoaDon
+			END
+			ELSE--Hóa đơn tồn tại, món tồn tại, *số lượng sau cùng KHÔNG hợp lệ (<0)
+			BEGIN--Chỉnh/Xóa [chi tiết hóa đơn], nếu [hóa đơn] chỉ có 1 [chi tiết hóa đơn] thì xóa luôn [hóa đơn]
+				DELETE dbo.ChiTietHoaDon WHERE HoaDon_idHoaDon = @IdHoaDon--Xóa chi tiết hóa đơn trước
+				DELETE dbo.HoaDon WHERE idHoaDon = @IdHoaDon--Xóa hóa đơn hóa đơn
+			END
+		END
+		ELSE--Hóa đơn tồn tại, *món này KHÔNG tồn tại
+		BEGIN
+			IF (@SoLuongMoi > 0)--Hóa đơn tồn tại, món này KHÔNG tồn tại, *số lượng sau cùng hợp lệ
+			BEGIN--Thêm [chi tiết hóa đơn], cập nhật tổng tiền và ngày lập trên [Hóa Đơn]
+				INSERT dbo.ChiTietHoaDon VALUES(@IdHoaDon,@IdMonAn,@SoLuongThemVao)--Thêm Chi Tiết Hóa Đơn
+
+				SET @TongTienMoi= @TongTienHienTai + (SELECT MA.Gia
+											FROM dbo.MonAn AS MA 
+											WHERE MA.idMonAn=@IdMonAn)*@SoLuongThemVao
+
+				UPDATE dbo.HoaDon SET TongTien = @TongTienMoi, NgayLap = GETDATE()
+				WHERE idHoaDon = @IdHoaDon;
+			END
+			--Hóa đơn tồn tại, món này KHÔNG tồn tại, *số lượng sau cùng KHÔNG hợp lệ -> Không làm gì cả
+		END--/Hóa đơn tồn tại, *món này KHÔNG tồn tại
+	END
+	ELSE--*Hóa đơn KHÔNG tồn tại
+	BEGIN
+		IF (@SoLuongMoi > 0)--Hóa đơn KHÔNG tồn tại, *số lượng sau cùng hợp lệ
+		BEGIN--Thêm HoaDon, thêm ChiTietHoaDon	
+			INSERT dbo.ChiTietHoaDon VALUES(@IdHoaDon,@IdMonAn,@SoLuongThemVao)--Thêm Chi Tiết Hóa Đơn
+			SET @TongTienMoi= @TongTienHienTai + (SELECT MA.Gia
+												FROM dbo.MonAn AS MA 
+												WHERE MA.idMonAn=@IdMonAn)*@SoLuongThemVao
+			INSERT dbo.HoaDon VALUES(GETDATE(),@TongTienMoi,@IdNhanVien)	--Thêm Hóa Đơn
+		END
+		--Hóa đơn KHÔNG tồn tại, *số lượng sau cùng KHÔNG hợp lệ -> KHÔNG LÀM GÌ CẢ
+	END
+GO
+
+
+--test
+	--SELECT *
+	--FROM dbo.HoaDon
+
+	--SELECT *
+	--FROM dbo.ChiTietHoaDon
+
+	--SELECT COUNT(*)
+	--FROM dbo.ChiTietHoaDon
+	--WHERE HoaDon_idHoaDon = 2
+---------------------------------------
+
 --Thêm MÓN ĂN
 CREATE PROC Them_Mon_An @TEN NVARCHAR(45),@GIA INT,@MIEUTA NVARCHAR(45),@HINHANH NVARCHAR(256)
 AS
@@ -128,94 +239,6 @@ GO
 --	--print(@idhoadon)
 --GO
 
---DÙNG
-
-ALTER PROC Them_Hoa_Don_Tung_Mon @IdHoaDon INT, @IdMonAn INT, @SoLuongThemVao INT, @IdNhanVien INT
-AS
-	DECLARE @LaHoaDonTonTai INT = 0
-	SELECT @LaHoaDonTonTai = idHoaDon
-	FROM dbo.HoaDon
-	WHERE idHoaDon = @IdHoaDon
-
-	DECLARE @SoLuongHienCo INT = 0
-	SELECT @SoLuongHienCo = SoLuong
-	FROM dbo.ChiTietHoaDon
-	WHERE HoaDon_idHoaDon = @IdHoaDon AND MonAn_idMonAn = @IdMonAn
-	
-	DECLARE @SoLuongMoi INT = @SoLuongHienCo + @SoLuongThemVao --Tính số lượng sau cùng sẽ lưu sau lần thêm này
-	
-	DECLARE @TongTienHienTai INT = 0
-	SELECT @TongTienHienTai = TongTien
-	FROM dbo.HoaDon
-	WHERE idHoaDon = @IdHoaDon
-
-	DECLARE @TongTienMoi INT
-
-	IF (@LaHoaDonTonTai>0)--*Hóa đơn tồn tại
-	BEGIN
-		IF(@SoLuongHienCo>0)--Hóa đơn tồn tại, *món này tồn tại
-		BEGIN
-			IF (@SoLuongMoi > 0)--Hóa đơn tồn tại, món tồn tại, *số lượng sau cùng hợp lệ
-			BEGIN--Tăng số lượng ở chi tiết hóa đơn, tăng tổng tiền ở hóa đơn, cập nhật ngày của hóa đơn
-				UPDATE dbo.ChiTietHoaDon SET SoLuong = @SoLuongMoi
-				WHERE HoaDon_idHoaDon = @IdHoaDon AND MonAn_idMonAn = @IdMonAn
-
-				SET @TongTienMoi= @TongTienHienTai + (SELECT MA.Gia
-											FROM dbo.MonAn AS MA 
-											WHERE MA.idMonAn=@IdMonAn)*@SoLuongThemVao
-				UPDATE dbo.HoaDon SET TongTien = @TongTienMoi, NgayLap = GETDATE()
-				WHERE idHoaDon = @IdHoaDon
-			END
-			ELSE--Hóa đơn tồn tại, món tồn tại, *số lượng sau cùng KHÔNG hợp lệ (<0)
-			BEGIN--Chỉnh/Xóa [chi tiết hóa đơn], nếu [hóa đơn] chỉ có 1 [chi tiết hóa đơn] thì xóa luôn [hóa đơn]
-				DELETE dbo.ChiTietHoaDon WHERE HoaDon_idHoaDon = @IdHoaDon--Xóa chi tiết hóa đơn trước
-				--Xử lí sau, cái này là tạm : UPDATE NEWS: Nguy hiem qua!!! Khong duoc dung
-				--DELETE dbo.HoaDon WHERE idHoaDon = @IdHoaDon--Xóa hóa đơn
-				--TẠM THỜI DO CHỖ NÀY NÊN KHÔNG ĐỂ COUNT LÀ SỐ ÂM ĐƯỢC -> CHỈNH BÊN GIAO DIỆN NUMERICUPDOWN MIN = 0
-			END
-		END
-		ELSE--Hóa đơn tồn tại, *món này KHÔNG tồn tại
-		BEGIN
-			IF (@SoLuongMoi > 0)--Hóa đơn tồn tại, món này KHÔNG tồn tại, *số lượng sau cùng hợp lệ
-			BEGIN--Thêm [chi tiết hóa đơn], cập nhật tổng tiền và ngày lập trên [Hóa Đơn]
-				INSERT dbo.ChiTietHoaDon VALUES(@IdHoaDon,@IdMonAn,@SoLuongThemVao)--Thêm Chi Tiết Hóa Đơn
-
-				SET @TongTienMoi= @TongTienHienTai + (SELECT MA.Gia
-											FROM dbo.MonAn AS MA 
-											WHERE MA.idMonAn=@IdMonAn)*@SoLuongThemVao
-
-				UPDATE dbo.HoaDon SET TongTien = @TongTienMoi, NgayLap = GETDATE()
-				WHERE idHoaDon = @IdHoaDon;
-			END
-			--Hóa đơn tồn tại, món này KHÔNG tồn tại, *số lượng sau cùng KHÔNG hợp lệ -> Không làm gì cả
-		END--/Hóa đơn tồn tại, *món này KHÔNG tồn tại
-	END
-	ELSE--*Hóa đơn KHÔNG tồn tại
-	BEGIN--Thêm HoaDon, thêm ChiTietHoaDon	
-		INSERT dbo.ChiTietHoaDon VALUES(@IdHoaDon,@IdMonAn,@SoLuongThemVao)--Thêm Chi Tiết Hóa Đơn
-		SET @TongTienMoi= @TongTienHienTai + (SELECT MA.Gia
-											FROM dbo.MonAn AS MA 
-											WHERE MA.idMonAn=@IdMonAn)*@SoLuongThemVao
-		INSERT dbo.HoaDon VALUES(GETDATE(),@TongTienMoi,@IdNhanVien)	--Thêm Hóa Đơn
-	END
-GO
-
---Thêm [Hóa Đơn]
-CREATE PROC Them_Hoa_Don @idNhanVien INT
-AS
-BEGIN
-	INSERT dbo.HoaDon VALUES(GETDATE(),0,@idNhanVien)
-END
-GO
-
---test
-	--SELECT *
-	--FROM dbo.HoaDon
-
-	--SELECT *
-	--FROM dbo.ChiTietHoaDon
-
-
 --khong dun`g
 --CREATE PROC Them_CT_Hoa_Don_Tung_Mon @IdHOADON INT,@IdMONAN INT,@SOLUONG INT
 --AS
@@ -224,11 +247,3 @@ GO
 --	SET TongTien+=(SELECT MA.Gia*@SOLUONG FROM MONAN AS MA WHERE MA.idMonAn=@IdMONAN)
 --	WHERE idHoaDon=@IdHOADON
 --GO
-
-CREATE PROC USER_Login
-@userName nvarchar(100), @passWord nvarchar(100)
-AS
-BEGIN
-	SELECT * FROM dbo.Account WHERE UserName = @userName AND PassWord = @passWord
-END
-GO

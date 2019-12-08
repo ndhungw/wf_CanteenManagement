@@ -54,7 +54,6 @@ namespace wf_CanteenManagement
             else{
                 MessageBox.Show("Sai tên tài khoản hoặc mật khẩu");
             }
-
         }
 
         bool Login(string userName, string password)
