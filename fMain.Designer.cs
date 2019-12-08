@@ -50,8 +50,8 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.lbCurrentBillWorkOn = new System.Windows.Forms.Label();
             this.nmFoodCount = new System.Windows.Forms.NumericUpDown();
+            this.lbCurrentBillWorkOn = new System.Windows.Forms.Label();
             this.btnNewBill = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
@@ -68,7 +68,7 @@
             this.tàiKhoảnToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(844, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(586, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -126,7 +126,7 @@
             // columnHeader1
             // 
             this.columnHeader1.Text = "Tên món ăn";
-            this.columnHeader1.Width = 205;
+            this.columnHeader1.Width = 253;
             // 
             // columnHeader2
             // 
@@ -192,7 +192,7 @@
             // cbFood
             // 
             this.cbFood.FormattingEnabled = true;
-            this.cbFood.Location = new System.Drawing.Point(60, 31);
+            this.cbFood.Location = new System.Drawing.Point(75, 30);
             this.cbFood.Name = "cbFood";
             this.cbFood.Size = new System.Drawing.Size(220, 21);
             this.cbFood.TabIndex = 4;
@@ -200,7 +200,7 @@
             // cbCategory
             // 
             this.cbCategory.FormattingEnabled = true;
-            this.cbCategory.Location = new System.Drawing.Point(60, 4);
+            this.cbCategory.Location = new System.Drawing.Point(75, 3);
             this.cbCategory.Name = "cbCategory";
             this.cbCategory.Size = new System.Drawing.Size(220, 21);
             this.cbCategory.TabIndex = 3;
@@ -223,7 +223,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(294, 7);
+            this.label4.Location = new System.Drawing.Point(351, 7);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(49, 13);
             this.label4.TabIndex = 11;
@@ -247,6 +247,23 @@
             this.label2.TabIndex = 9;
             this.label2.Text = "Loại món";
             // 
+            // nmFoodCount
+            // 
+            this.nmFoodCount.Location = new System.Drawing.Point(345, 27);
+            this.nmFoodCount.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
+            this.nmFoodCount.Name = "nmFoodCount";
+            this.nmFoodCount.Size = new System.Drawing.Size(64, 20);
+            this.nmFoodCount.TabIndex = 6;
+            this.nmFoodCount.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
             // lbCurrentBillWorkOn
             // 
             this.lbCurrentBillWorkOn.AutoSize = true;
@@ -255,23 +272,6 @@
             this.lbCurrentBillWorkOn.Size = new System.Drawing.Size(13, 13);
             this.lbCurrentBillWorkOn.TabIndex = 8;
             this.lbCurrentBillWorkOn.Text = "0";
-            // 
-            // nmFoodCount
-            // 
-            this.nmFoodCount.Location = new System.Drawing.Point(297, 31);
-            this.nmFoodCount.Minimum = new decimal(new int[] {
-            100,
-            0,
-            0,
-            -2147483648});
-            this.nmFoodCount.Name = "nmFoodCount";
-            this.nmFoodCount.Size = new System.Drawing.Size(55, 20);
-            this.nmFoodCount.TabIndex = 6;
-            this.nmFoodCount.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
             // 
             // btnNewBill
             // 
@@ -296,7 +296,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(844, 601);
+            this.ClientSize = new System.Drawing.Size(586, 601);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.btnNewBill);
             this.Controls.Add(this.lsvBill);
