@@ -215,10 +215,6 @@ GO
 	--SELECT *
 	--FROM dbo.ChiTietHoaDon
 
---	SELECT MA.Ten as [Ten mon], CT.SoLuong as [So luong], MA.Gia as [Don gia], MA.Gia*CT.SoLuong as [Thanh tien]
---	FROM dbo.ChiTietHoaDon CT, dbo.HoaDon HD, dbo.MonAn MA
---	WHERE CT.HoaDon_idHoaDon = HD.idHoaDon AND CT.MonAn_idMonAn = MA.idMonAn
---	AND HD.idHoaDon=5
 
 --khong dun`g
 --CREATE PROC Them_CT_Hoa_Don_Tung_Mon @IdHOADON INT,@IdMONAN INT,@SOLUONG INT

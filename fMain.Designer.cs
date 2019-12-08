@@ -41,7 +41,7 @@
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.panel3 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txbToTalPriceOfBill = new System.Windows.Forms.TextBox();
             this.btnCheckout = new System.Windows.Forms.Button();
             this.btnAddFood = new System.Windows.Forms.Button();
             this.cbFood = new System.Windows.Forms.ComboBox();
@@ -113,9 +113,9 @@
             this.columnHeader4});
             this.lsvBill.GridLines = true;
             this.lsvBill.HideSelection = false;
-            this.lsvBill.Location = new System.Drawing.Point(604, 116);
+            this.lsvBill.Location = new System.Drawing.Point(594, 116);
             this.lsvBill.Name = "lsvBill";
-            this.lsvBill.Size = new System.Drawing.Size(455, 322);
+            this.lsvBill.Size = new System.Drawing.Size(458, 322);
             this.lsvBill.TabIndex = 3;
             this.lsvBill.UseCompatibleStateImageBehavior = false;
             this.lsvBill.View = System.Windows.Forms.View.Details;
@@ -123,30 +123,31 @@
             // columnHeader1
             // 
             this.columnHeader1.Text = "Tên món ăn";
-            this.columnHeader1.Width = 69;
+            this.columnHeader1.Width = 148;
             // 
             // columnHeader2
             // 
             this.columnHeader2.Text = "Số lượng";
-            this.columnHeader2.Width = 127;
+            this.columnHeader2.Width = 55;
             // 
             // columnHeader3
             // 
             this.columnHeader3.Text = "Đơn giá";
+            this.columnHeader3.Width = 115;
             // 
             // columnHeader4
             // 
             this.columnHeader4.Text = "Thành tiền";
-            this.columnHeader4.Width = 90;
+            this.columnHeader4.Width = 131;
             // 
             // panel3
             // 
             this.panel3.Controls.Add(this.label1);
-            this.panel3.Controls.Add(this.textBox1);
+            this.panel3.Controls.Add(this.txbToTalPriceOfBill);
             this.panel3.Controls.Add(this.btnCheckout);
-            this.panel3.Location = new System.Drawing.Point(597, 444);
+            this.panel3.Location = new System.Drawing.Point(594, 444);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(455, 145);
+            this.panel3.Size = new System.Drawing.Size(458, 145);
             this.panel3.TabIndex = 1;
             // 
             // label1
@@ -154,16 +155,16 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(15, 20);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(52, 13);
+            this.label1.Size = new System.Drawing.Size(38, 13);
             this.label1.TabIndex = 9;
-            this.label1.Text = "Tổng tiền";
+            this.label1.Text = "TỔNG";
             // 
-            // textBox1
+            // txbToTalPriceOfBill
             // 
-            this.textBox1.Location = new System.Drawing.Point(315, 13);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(128, 20);
-            this.textBox1.TabIndex = 8;
+            this.txbToTalPriceOfBill.Location = new System.Drawing.Point(331, 13);
+            this.txbToTalPriceOfBill.Name = "txbToTalPriceOfBill";
+            this.txbToTalPriceOfBill.Size = new System.Drawing.Size(124, 20);
+            this.txbToTalPriceOfBill.TabIndex = 8;
             // 
             // btnCheckout
             // 
@@ -294,7 +295,7 @@
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.ColumnHeader columnHeader4;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txbToTalPriceOfBill;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.FlowLayoutPanel flpFoodImgList;
         private System.Windows.Forms.Button btnNewBill;
