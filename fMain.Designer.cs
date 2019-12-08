@@ -50,6 +50,10 @@
             this.nmFoodCount = new System.Windows.Forms.NumericUpDown();
             this.flpFoodImgList = new System.Windows.Forms.FlowLayoutPanel();
             this.btnNewBill = new System.Windows.Forms.Button();
+            this.lbCurrentBillWorkOn = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -113,9 +117,9 @@
             this.columnHeader4});
             this.lsvBill.GridLines = true;
             this.lsvBill.HideSelection = false;
-            this.lsvBill.Location = new System.Drawing.Point(594, 116);
+            this.lsvBill.Location = new System.Drawing.Point(594, 147);
             this.lsvBill.Name = "lsvBill";
-            this.lsvBill.Size = new System.Drawing.Size(458, 322);
+            this.lsvBill.Size = new System.Drawing.Size(458, 282);
             this.lsvBill.TabIndex = 3;
             this.lsvBill.UseCompatibleStateImageBehavior = false;
             this.lsvBill.View = System.Windows.Forms.View.Details;
@@ -177,7 +181,7 @@
             // 
             // btnAddFood
             // 
-            this.btnAddFood.Location = new System.Drawing.Point(371, 18);
+            this.btnAddFood.Location = new System.Drawing.Point(368, 53);
             this.btnAddFood.Name = "btnAddFood";
             this.btnAddFood.Size = new System.Drawing.Size(75, 48);
             this.btnAddFood.TabIndex = 5;
@@ -188,34 +192,39 @@
             // cbFood
             // 
             this.cbFood.FormattingEnabled = true;
-            this.cbFood.Location = new System.Drawing.Point(10, 44);
+            this.cbFood.Location = new System.Drawing.Point(73, 81);
             this.cbFood.Name = "cbFood";
-            this.cbFood.Size = new System.Drawing.Size(261, 21);
+            this.cbFood.Size = new System.Drawing.Size(205, 21);
             this.cbFood.TabIndex = 4;
+            this.cbFood.SelectedIndexChanged += new System.EventHandler(this.CbFood_SelectedIndexChanged);
             // 
             // cbCategory
             // 
             this.cbCategory.FormattingEnabled = true;
-            this.cbCategory.Location = new System.Drawing.Point(10, 17);
+            this.cbCategory.Location = new System.Drawing.Point(73, 54);
             this.cbCategory.Name = "cbCategory";
-            this.cbCategory.Size = new System.Drawing.Size(261, 21);
+            this.cbCategory.Size = new System.Drawing.Size(205, 21);
             this.cbCategory.TabIndex = 3;
             this.cbCategory.SelectedIndexChanged += new System.EventHandler(this.CbCategory_SelectedIndexChanged);
             // 
             // panel4
             // 
-            this.panel4.Controls.Add(this.nmFoodCount);
+            this.panel4.Controls.Add(this.label4);
+            this.panel4.Controls.Add(this.label3);
+            this.panel4.Controls.Add(this.label2);
             this.panel4.Controls.Add(this.btnAddFood);
+            this.panel4.Controls.Add(this.lbCurrentBillWorkOn);
+            this.panel4.Controls.Add(this.nmFoodCount);
             this.panel4.Controls.Add(this.cbFood);
             this.panel4.Controls.Add(this.cbCategory);
             this.panel4.Location = new System.Drawing.Point(594, 27);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(458, 83);
+            this.panel4.Size = new System.Drawing.Size(458, 114);
             this.panel4.TabIndex = 2;
             // 
             // nmFoodCount
             // 
-            this.nmFoodCount.Location = new System.Drawing.Point(293, 34);
+            this.nmFoodCount.Location = new System.Drawing.Point(295, 81);
             this.nmFoodCount.Minimum = new decimal(new int[] {
             100,
             0,
@@ -249,6 +258,42 @@
             this.btnNewBill.UseVisualStyleBackColor = true;
             this.btnNewBill.Click += new System.EventHandler(this.BtnNewBill_Click);
             // 
+            // lbCurrentBillWorkOn
+            // 
+            this.lbCurrentBillWorkOn.AutoSize = true;
+            this.lbCurrentBillWorkOn.Location = new System.Drawing.Point(15, 12);
+            this.lbCurrentBillWorkOn.Name = "lbCurrentBillWorkOn";
+            this.lbCurrentBillWorkOn.Size = new System.Drawing.Size(66, 13);
+            this.lbCurrentBillWorkOn.TabIndex = 8;
+            this.lbCurrentBillWorkOn.Text = "Hóa đơn số ";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(3, 54);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(50, 13);
+            this.label2.TabIndex = 9;
+            this.label2.Text = "Loại món";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(3, 81);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(49, 13);
+            this.label3.TabIndex = 10;
+            this.label3.Text = "Tên món";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(292, 57);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(49, 13);
+            this.label4.TabIndex = 11;
+            this.label4.Text = "Số lượng";
+            // 
             // fMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -268,6 +313,7 @@
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nmFoodCount)).EndInit();
             this.flpFoodImgList.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -299,5 +345,9 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.FlowLayoutPanel flpFoodImgList;
         private System.Windows.Forms.Button btnNewBill;
+        private System.Windows.Forms.Label lbCurrentBillWorkOn;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
     }
 }

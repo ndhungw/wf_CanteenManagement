@@ -36,5 +36,10 @@ namespace wf_CanteenManagement.DAO
         {
             DataProvider.Instance.ExecNonQuery("EXEC Them_Hoa_Don @IdNhanVien", new object[] { 1 });
         }
+
+        public void CheckOut()
+        {
+
+        }
     }
 }

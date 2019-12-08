@@ -105,8 +105,15 @@ namespace wf_CanteenManagement
         private void BtnNewBill_Click(object sender, EventArgs e)
         {
             BillDAO.Instance.InsertBill();//Tạo bill mới
+            lbCurrentBillWorkOn.Text += BillDAO.Instance.GetMaxIDBill().ToString();
             lsvBill.Items.Clear();
+
         }
 
+
+        private void CbFood_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
