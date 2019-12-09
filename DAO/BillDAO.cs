@@ -28,6 +28,8 @@ namespace wf_CanteenManagement.DAO
             }
             catch
             {
+                //Nếu chưa có thì tạo hóa đơn mới (hóa đơn đầu tiên)
+                DataProvider.Instance.ExecNonQuery("EXEC Them_Hoa_Don @idNhanVien", new object[] { 1 });
                 return 1;
             }
         }
@@ -35,6 +37,11 @@ namespace wf_CanteenManagement.DAO
         public void InsertBill()
         {
             DataProvider.Instance.ExecNonQuery("EXEC Them_Hoa_Don @IdNhanVien", new object[] { 1 });
+        }
+
+        public void RemoveBill(int idBill)
+        {
+            DataProvider.Instance.ExecNonQuery("Huy_Hoa_Don_Dang_Tao @IdHoaDon", new object[] { idBill });
         }
 
         public void CheckOut()

@@ -89,5 +89,25 @@ namespace wf_CanteenManagement
         {
 
         }
+
+        private void BtnAddFood_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtnDeleteFood_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtnEditFood_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtnShowFood_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
