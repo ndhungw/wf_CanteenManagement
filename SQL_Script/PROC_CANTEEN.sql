@@ -130,7 +130,7 @@ GO
 
 --DÙNG
 
-ALTER PROC Them_Hoa_Don_Tung_Mon @IdHoaDon INT, @IdMonAn INT, @SoLuongThemVao INT, @IdNhanVien INT
+create PROC Them_Hoa_Don_Tung_Mon @IdHoaDon INT, @IdMonAn INT, @SoLuongThemVao INT, @IdNhanVien INT
 AS
 	DECLARE @LaHoaDonTonTai INT = 0
 	SELECT @LaHoaDonTonTai = idHoaDon
