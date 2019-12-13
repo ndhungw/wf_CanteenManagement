@@ -39,13 +39,13 @@
             this.dtgvFood = new System.Windows.Forms.DataGridView();
             this.panel3 = new System.Windows.Forms.Panel();
             this.btnShowFood = new System.Windows.Forms.Button();
-            this.btnEditFood = new System.Windows.Forms.Button();
-            this.btnDeleteFood = new System.Windows.Forms.Button();
             this.btnAddFood = new System.Windows.Forms.Button();
+            this.btnDeleteFood = new System.Windows.Forms.Button();
+            this.btnEditFood = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.txbSearchFoodName = new System.Windows.Forms.TextBox();
             this.btnSearchFood = new System.Windows.Forms.Button();
             this.panel6 = new System.Windows.Forms.Panel();
-            this.txbSearchFoodName = new System.Windows.Forms.TextBox();
             this.panel10 = new System.Windows.Forms.Panel();
             this.nmFoodPrice = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
@@ -141,9 +141,9 @@
             // 
             // btnViewBill
             // 
-            this.btnViewBill.Location = new System.Drawing.Point(426, 13);
+            this.btnViewBill.Location = new System.Drawing.Point(406, 3);
             this.btnViewBill.Name = "btnViewBill";
-            this.btnViewBill.Size = new System.Drawing.Size(75, 23);
+            this.btnViewBill.Size = new System.Drawing.Size(100, 44);
             this.btnViewBill.TabIndex = 2;
             this.btnViewBill.Text = "Thống kê";
             this.btnViewBill.UseVisualStyleBackColor = true;
@@ -158,7 +158,7 @@
             this.dtpkToDate.Name = "dtpkToDate";
             this.dtpkToDate.Size = new System.Drawing.Size(150, 26);
             this.dtpkToDate.TabIndex = 1;
-            this.dtpkToDate.Value = new System.DateTime(2019, 9, 17, 0, 0, 0, 0);
+            this.dtpkToDate.Value = new System.DateTime(2019, 12, 14, 0, 0, 0, 0);
             // 
             // dtpkFromDate
             // 
@@ -170,7 +170,7 @@
             this.dtpkFromDate.Name = "dtpkFromDate";
             this.dtpkFromDate.Size = new System.Drawing.Size(150, 26);
             this.dtpkFromDate.TabIndex = 0;
-            this.dtpkFromDate.Value = new System.DateTime(2019, 9, 8, 0, 0, 0, 0);
+            this.dtpkFromDate.Value = new System.DateTime(2019, 12, 14, 0, 0, 0, 0);
             // 
             // tpFood
             // 
@@ -181,7 +181,7 @@
             this.tpFood.Location = new System.Drawing.Point(4, 22);
             this.tpFood.Name = "tpFood";
             this.tpFood.Padding = new System.Windows.Forms.Padding(3);
-            this.tpFood.Size = new System.Drawing.Size(1036, 614);
+            this.tpFood.Size = new System.Drawing.Size(1052, 614);
             this.tpFood.TabIndex = 1;
             this.tpFood.Text = "Thức ăn";
             this.tpFood.UseVisualStyleBackColor = true;
@@ -216,15 +216,15 @@
             this.btnShowFood.UseVisualStyleBackColor = true;
             this.btnShowFood.Click += new System.EventHandler(this.BtnShowFood_Click);
             // 
-            // btnEditFood
+            // btnAddFood
             // 
-            this.btnEditFood.Location = new System.Drawing.Point(179, 6);
-            this.btnEditFood.Name = "btnEditFood";
-            this.btnEditFood.Size = new System.Drawing.Size(77, 60);
-            this.btnEditFood.TabIndex = 2;
-            this.btnEditFood.Text = "Sửa";
-            this.btnEditFood.UseVisualStyleBackColor = true;
-            this.btnEditFood.Click += new System.EventHandler(this.BtnEditFood_Click);
+            this.btnAddFood.Location = new System.Drawing.Point(12, 6);
+            this.btnAddFood.Name = "btnAddFood";
+            this.btnAddFood.Size = new System.Drawing.Size(77, 60);
+            this.btnAddFood.TabIndex = 0;
+            this.btnAddFood.Text = "Thêm";
+            this.btnAddFood.UseVisualStyleBackColor = true;
+            this.btnAddFood.Click += new System.EventHandler(this.BtnAddFood_Click);
             // 
             // btnDeleteFood
             // 
@@ -236,15 +236,15 @@
             this.btnDeleteFood.UseVisualStyleBackColor = true;
             this.btnDeleteFood.Click += new System.EventHandler(this.BtnDeleteFood_Click);
             // 
-            // btnAddFood
+            // btnEditFood
             // 
-            this.btnAddFood.Location = new System.Drawing.Point(12, 6);
-            this.btnAddFood.Name = "btnAddFood";
-            this.btnAddFood.Size = new System.Drawing.Size(77, 60);
-            this.btnAddFood.TabIndex = 0;
-            this.btnAddFood.Text = "Thêm";
-            this.btnAddFood.UseVisualStyleBackColor = true;
-            this.btnAddFood.Click += new System.EventHandler(this.BtnAddFood_Click);
+            this.btnEditFood.Location = new System.Drawing.Point(179, 6);
+            this.btnEditFood.Name = "btnEditFood";
+            this.btnEditFood.Size = new System.Drawing.Size(77, 60);
+            this.btnEditFood.TabIndex = 2;
+            this.btnEditFood.Text = "Sửa";
+            this.btnEditFood.UseVisualStyleBackColor = true;
+            this.btnEditFood.Click += new System.EventHandler(this.BtnEditFood_Click);
             // 
             // panel4
             // 
@@ -254,6 +254,13 @@
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(616, 70);
             this.panel4.TabIndex = 2;
+            // 
+            // txbSearchFoodName
+            // 
+            this.txbSearchFoodName.Location = new System.Drawing.Point(43, 27);
+            this.txbSearchFoodName.Name = "txbSearchFoodName";
+            this.txbSearchFoodName.Size = new System.Drawing.Size(469, 20);
+            this.txbSearchFoodName.TabIndex = 5;
             // 
             // btnSearchFood
             // 
@@ -275,13 +282,6 @@
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(348, 485);
             this.panel6.TabIndex = 3;
-            // 
-            // txbSearchFoodName
-            // 
-            this.txbSearchFoodName.Location = new System.Drawing.Point(43, 27);
-            this.txbSearchFoodName.Name = "txbSearchFoodName";
-            this.txbSearchFoodName.Size = new System.Drawing.Size(469, 20);
-            this.txbSearchFoodName.TabIndex = 5;
             // 
             // panel10
             // 

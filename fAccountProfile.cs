@@ -21,8 +21,13 @@ namespace wf_CanteenManagement
             InitializeComponent();
 
             this.sessionInfo = sessionInfo;
+
             txtUsername.Text = sessionInfo.Username;
+            txtUsername.ReadOnly = true;
+
             txtPassword.Text = sessionInfo.Password;
+            txtPassword.UseSystemPasswordChar = true;
+
             txtDisplayName.Text = sessionInfo.DisplayName;
         }
 
@@ -46,7 +51,8 @@ namespace wf_CanteenManagement
                     return;
                 }
 
-                string query = $"UPDATE dbo.Account SET UserName = '{username}', DisplayName = '{displayName}', PassWord = '{password}' WHERE UserName = '{sessionInfo.Username}' AND PassWord = '{sessionInfo.Password}';";
+                //chỉ cho phép thay đổi tên hiển thị và password
+                string query = $"UPDATE dbo.Account SET DisplayName = '{displayName}', PassWord = '{password}' WHERE UserName = '{sessionInfo.Username}' AND PassWord = '{sessionInfo.Password}';";
 
                 DataProvider.Instance.ExecNonQuery(query);
                 MessageBox.Show("Cập nhật thông tin tài khoản thành công", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -55,7 +61,6 @@ namespace wf_CanteenManagement
             {
 
             }
-          
-}
+        }
     }
 }

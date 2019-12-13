@@ -20,24 +20,14 @@ namespace wf_CanteenManagement.DAO
 
         private BillInfoDAO() { }
 
-        //public List<BillInfo> GetListBillInfo()
-        //{
-        //    List<BillInfo> listBill = new List<BillInfo>();
-
-        //    DataTable data = DataProvider.Instance.ExecQuery(
-        //        "SELECT * FROM ChiTietHoaDon WHERE HoaDon_idHoaDon = " + BillDAO.Instance.GetMaxIDBill());
-
-        //    foreach (DataRow item in data.Rows)
-        //    {
-        //        BillInfo bill = new BillInfo(item);
-        //        listBill.Add(bill);
-        //    }
-        //    return listBill;
-        //}
-
         public void InsertBillInfo(int idBill, int idFood, int count)
         {
             DataProvider.Instance.ExecNonQuery("EXEC Them_Hoa_Don_Tung_Mon @IdHoaDon , @IdMonAn , @SoLuongThemVao , @IdNhanVien", new object[] { idBill, idFood, count, 1 });
+        }
+
+        public void RemoveBillInfo(int idBill)
+        {
+            DataProvider.Instance.ExecNonQuery("Huy_Hoa_Don_Dang_Tao @IdHoaDon", new object[] { idBill });
         }
 
         public int CheckBillInfoExists(int idBill)

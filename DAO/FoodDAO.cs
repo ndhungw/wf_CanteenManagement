@@ -48,7 +48,7 @@ namespace wf_CanteenManagement.DAO
             List<Food> list = new List<Food>();
 
             string query =  "SELECT MA.* " +
-                            "FROM MonAn MA, MonAn_thuoc_LoaiMon_ MATLM WHERE MATLM.LoaiMonAn_idLoaiMonAn = " + id +
+                            "FROM MonAn MA, MonAn_thuoc_LoaiMon MATLM WHERE MATLM.LoaiMonAn_idLoaiMonAn = " + id +
                             "AND MA.idMonAn = MATLM.MonAn_idMonAn";
 
             DataTable data = DataProvider.Instance.ExecQuery(query);

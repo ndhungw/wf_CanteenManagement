@@ -15,13 +15,18 @@ namespace wf_CanteenManagement
     public partial class fMain : Form
     {
         private Session sessionInfo = null;
+
         public fMain(Session sessionInfo)
         {
             InitializeComponent();
 
             this.sessionInfo = sessionInfo;
 
-            lbCurrentBillWorkOn.Text = BillDAO.Instance.GetMaxIDBill().ToString();
+            lbDisplayName.Text = sessionInfo.DisplayName;
+
+            lbDate.Text = DateTime.Now.Date.ToString("dd/MM/yyyy");
+
+            lbCurrentBillWorkOn.Text = IDBillWorkingOn.ToString();
 
             LoadCategory();
         }
@@ -40,9 +45,8 @@ namespace wf_CanteenManagement
             cbFood.DisplayMember = "Name";
             return;
         }
-        //
 
-        
+
         private void ĐăngXuấtToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -52,14 +56,20 @@ namespace wf_CanteenManagement
         {
             fAccountProfile f = new fAccountProfile(sessionInfo);
             f.ShowDialog();
-
         }
 
         private void AdminToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            fAdmin f = new fAdmin();
-            f.ShowDialog();
-
+            if (sessionInfo.Username == "admin")
+            {
+                fAdmin f = new fAdmin();
+                f.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Chỉ admin mới có quyền truy cập vào chức năng này!", "Thông báo",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void CbCategory_SelectedIndexChanged(object sender, EventArgs e)
@@ -68,7 +78,7 @@ namespace wf_CanteenManagement
 
             ComboBox cb = sender as ComboBox;
 
-            if(cb.SelectedItem == null)
+            if (cb.SelectedItem == null)
             {
                 return;
             }
@@ -83,7 +93,7 @@ namespace wf_CanteenManagement
         {
             List<DTO.BillView> listMenu = BillViewDAO.Instance.GetListMenuByBill(idBill);
             int totalPriceOfBill = 0;
-            foreach(DTO.BillView item in listMenu)
+            foreach (DTO.BillView item in listMenu)
             {
                 ListViewItem lsvItem = new ListViewItem(item.FoodName.ToString());
                 lsvItem.SubItems.Add(item.Count.ToString());
@@ -95,66 +105,133 @@ namespace wf_CanteenManagement
             txbToTalPriceOfBill.Text = totalPriceOfBill.ToString();
         }
 
+        int IDBillWorkingOn = 0;
+        bool isAddingFood = false;
+        bool isCheckedOut = true;
+
         private void BtnAddFood_Click(object sender, EventArgs e)
         {
-            lsvBill.Items.Clear();
-
-            int idBill = BillDAO.Instance.GetMaxIDBill();//Lấy idBill mới
-            int foodID = (cbFood.SelectedItem as Food).ID;
-            int count = (int)nmFoodCount.Value;
-
-            lbCurrentBillWorkOn.Text = idBill.ToString();
-
-            if (count < 0)
+            if (isAddingFood == true)
             {
-                if (BillInfoDAO.Instance.CheckBillInfoExists(idBill)==0)//Không có chi tiết hóa đơn
-                {
-                    MessageBox.Show("Số lượng không được âm khi món này chưa tồn tại trong hóa đơn");
-                    return;
-                }
-            }
-            
-            BillInfoDAO.Instance.InsertBillInfo(idBill, foodID, count);
-            ShowBill(idBill);
-        }
+                lsvBill.Items.Clear();
 
-        bool isCheckedOut = true;
-        private void BtnNewBill_Click(object sender, EventArgs e)
-        {
-            if (isCheckedOut == false)
-            {
-                
-                DialogResult CancelCheckOut = MessageBox.Show("Hóa đơn chưa thanh toán\nVẫn tạo mới hóa đơn?", "Cảnh báo",
-                MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-                if (CancelCheckOut == DialogResult.OK)
+                int idBill = BillDAO.Instance.GetMaxIDBill();//Lấy idBill mới
+                int foodID = (cbFood.SelectedItem as Food).ID;
+                int count = (int)nmFoodCount.Value;
+
+                lbCurrentBillWorkOn.Text = idBill.ToString();
+
+                if (count < 0)//có bao giờ chạy tới dòng này?
                 {
-                    BillDAO.Instance.RemoveBill(int.Parse(lbCurrentBillWorkOn.Text));//Hủy CTHĐ và HĐ
+                    if (BillInfoDAO.Instance.CheckBillInfoExists(idBill) == 0)//Không có chi tiết hóa đơn
+                    {
+                        MessageBox.Show("Số lượng không được âm khi món này chưa tồn tại trong hóa đơn");
+                        return;
+                    }
                 }
+
+                BillInfoDAO.Instance.InsertBillInfo(idBill, foodID, count);
+                ShowBill(idBill);
             }
             else
             {
+                MessageBox.Show("Chưa tạo hóa đơn, không thể thêm món !");
+            }
+        }
+
+        private void BtnNewBill_Click(object sender, EventArgs e)
+        {
+            if (isCheckedOut == true && isAddingFood == false)//hóa đơn đầu/đã thanh toán
+            {
                 BillDAO.Instance.InsertBill();//Tạo bill mới
-                isCheckedOut = false;
-                lbCurrentBillWorkOn.Text = BillDAO.Instance.GetMaxIDBill().ToString();
+                IDBillWorkingOn = BillDAO.Instance.GetMaxIDBill();//Lấy ID của bill mới
+
+                lbCurrentBillWorkOn.Text = IDBillWorkingOn.ToString();
                 lsvBill.Items.Clear();
+                isAddingFood = true;//Bật cờ phép thêm bớt món ăn
+                isCheckedOut = false;//Tắt cờ hiệu báo đã thanh toán
+            }
+            else if (isCheckedOut == false && isAddingFood == true)//Nếu chưa thanh toán
+            {
+                int FoodCountOnBill = BillInfoDAO.Instance.CheckBillInfoExists(IDBillWorkingOn);//Số lượng món hiện đang trong bill
+
+                if (FoodCountOnBill == 0)
+                {
+                    MessageBox.Show("Hóa đơn hiện không có gì, không cần tạo mới!");
+                    return;
+                }
+                else
+                {
+                    DialogResult CancelCheckOut = MessageBox.Show("Hóa đơn chưa thanh toán\nHủy hóa đơn này và tạo mới hóa đơn khác?", "Cảnh báo",
+                MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                    if (CancelCheckOut == DialogResult.OK)
+                    {
+                        BillInfoDAO.Instance.RemoveBillInfo(int.Parse(lbCurrentBillWorkOn.Text));//Hủy CTHĐ
+                        lsvBill.Items.Clear();
+                        isAddingFood = true;//Bật cờ phép thêm bớt món ăn
+                        isCheckedOut = false;//Tắt cờ hiệu báo đã thanh toán
+                    }
+                }
             }
         }
 
         private void BtnCheckout_Click(object sender, EventArgs e)
         {
-            //Bill chưa tồn tại
-
-            //Bill đã thanh toán
-
-            //Bill chưa thanh toán
-            //Hỏi xác nhận
-            DialogResult CheckOutConfirm = MessageBox.Show("Xác nhận thanh toán?", "Thông báo",
-                MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-            if (CheckOutConfirm == DialogResult.OK)
+            //Bill không tồn tại (chưa tạo mới bill)
+            if (isCheckedOut == true)
             {
-                isCheckedOut = true;
-                MessageBox.Show("Thanh toán thành công!");
-                return;
+                MessageBox.Show("Hóa đơn chưa dược tạo mới, không thể thanh toán");
+            }
+            //Kiểm tra trong hóa đơn nếu không có dữ liệu thì không cho thanh toán
+            else
+            {
+                int FoodCountOnBill = BillInfoDAO.Instance.CheckBillInfoExists(IDBillWorkingOn);//Số lượng món hiện đang trong bill
+
+                if (FoodCountOnBill == 0)
+                {
+                    MessageBox.Show("Hóa đơn hiện không có gì, không thể thanh toán!");
+                }
+                //Bill chưa thanh toán
+                else if (isCheckedOut == false)
+                {
+                    //Hỏi xác nhận
+                    DialogResult CheckOutConfirm = MessageBox.Show("Xác nhận thanh toán?", "Thông báo",
+                        MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                    if (CheckOutConfirm == DialogResult.OK)
+                    {
+                        lbCurrentBillWorkOn.Text += " - Đã thanh toán";
+                        isCheckedOut = true;//Đánh dấu đã thanh toán
+                        IDBillWorkingOn = 0;//Chỉnh idbill về trạng thái không hợp lệ-
+                        isAddingFood = false;//Không cho phép thêm món
+                        MessageBox.Show("Thanh toán thành công!");
+                        return;
+                    }
+                }
+            }
+        }
+
+        private void FMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if(isCheckedOut==false)//Chưa thanh toán
+            {
+                if(MessageBox.Show("Hóa đơn hiện tại chưa được hoàn thành\nVẫn thoát ra?", "Cảnh báo", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning)
+                    != System.Windows.Forms.DialogResult.OK)
+                {
+                    e.Cancel = true;
+                }
+                else
+                {
+                    BillDAO.Instance.RemoveBill(IDBillWorkingOn);//Xóa hóa đơn đã tạo nhưng chưa được hoàn thành trong phiên làm việc
+                    MessageBox.Show("Đã xóa hóa đơn hiện tại\n Chương trình sẽ trở về màn hình đăng nhập!");
+                }
+            }
+            else
+            {
+                if (MessageBox.Show("Bạn muốn trở về màn hình đăng nhập?", "Thông báo", MessageBoxButtons.OKCancel, MessageBoxIcon.Question)
+                != System.Windows.Forms.DialogResult.OK)
+                {
+                    e.Cancel = true;
+                }
             }
         }
     }

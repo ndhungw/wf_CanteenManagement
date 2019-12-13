@@ -54,6 +54,10 @@
             this.lbCurrentBillWorkOn = new System.Windows.Forms.Label();
             this.btnNewBill = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.lbDisplayName = new System.Windows.Forms.Label();
+            this.lbDate = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -96,14 +100,14 @@
             // thôngTinTàiKhoảnToolStripMenuItem
             // 
             this.thôngTinTàiKhoảnToolStripMenuItem.Name = "thôngTinTàiKhoảnToolStripMenuItem";
-            this.thôngTinTàiKhoảnToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.thôngTinTàiKhoảnToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.thôngTinTàiKhoảnToolStripMenuItem.Text = "Thông tin tài khoản";
             this.thôngTinTàiKhoảnToolStripMenuItem.Click += new System.EventHandler(this.ThôngTinTàiKhoảnToolStripMenuItem_Click);
             // 
             // đăngXuấtToolStripMenuItem
             // 
             this.đăngXuấtToolStripMenuItem.Name = "đăngXuấtToolStripMenuItem";
-            this.đăngXuấtToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.đăngXuấtToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.đăngXuấtToolStripMenuItem.Text = "Đăng xuất";
             this.đăngXuấtToolStripMenuItem.Click += new System.EventHandler(this.ĐăngXuấtToolStripMenuItem_Click);
             // 
@@ -116,7 +120,7 @@
             this.columnHeader4});
             this.lsvBill.GridLines = true;
             this.lsvBill.HideSelection = false;
-            this.lsvBill.Location = new System.Drawing.Point(12, 81);
+            this.lsvBill.Location = new System.Drawing.Point(12, 71);
             this.lsvBill.Name = "lsvBill";
             this.lsvBill.Size = new System.Drawing.Size(562, 340);
             this.lsvBill.TabIndex = 3;
@@ -145,10 +149,13 @@
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.label5);
             this.panel3.Controls.Add(this.label1);
+            this.panel3.Controls.Add(this.lbCurrentBillWorkOn);
+            this.panel3.Controls.Add(this.btnNewBill);
             this.panel3.Controls.Add(this.txbToTalPriceOfBill);
             this.panel3.Controls.Add(this.btnCheckout);
-            this.panel3.Location = new System.Drawing.Point(12, 491);
+            this.panel3.Location = new System.Drawing.Point(12, 481);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(562, 98);
             this.panel3.TabIndex = 1;
@@ -164,14 +171,14 @@
             // 
             // txbToTalPriceOfBill
             // 
-            this.txbToTalPriceOfBill.Location = new System.Drawing.Point(425, 10);
+            this.txbToTalPriceOfBill.Location = new System.Drawing.Point(438, 10);
             this.txbToTalPriceOfBill.Name = "txbToTalPriceOfBill";
             this.txbToTalPriceOfBill.Size = new System.Drawing.Size(124, 20);
             this.txbToTalPriceOfBill.TabIndex = 8;
             // 
             // btnCheckout
             // 
-            this.btnCheckout.Location = new System.Drawing.Point(453, 36);
+            this.btnCheckout.Location = new System.Drawing.Point(466, 47);
             this.btnCheckout.Name = "btnCheckout";
             this.btnCheckout.Size = new System.Drawing.Size(96, 48);
             this.btnCheckout.TabIndex = 7;
@@ -181,7 +188,7 @@
             // 
             // btnAddFood
             // 
-            this.btnAddFood.Location = new System.Drawing.Point(453, 4);
+            this.btnAddFood.Location = new System.Drawing.Point(466, 3);
             this.btnAddFood.Name = "btnAddFood";
             this.btnAddFood.Size = new System.Drawing.Size(96, 48);
             this.btnAddFood.TabIndex = 5;
@@ -215,7 +222,7 @@
             this.panel4.Controls.Add(this.nmFoodCount);
             this.panel4.Controls.Add(this.cbFood);
             this.panel4.Controls.Add(this.cbCategory);
-            this.panel4.Location = new System.Drawing.Point(12, 427);
+            this.panel4.Location = new System.Drawing.Point(12, 417);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(562, 58);
             this.panel4.TabIndex = 2;
@@ -267,7 +274,7 @@
             // lbCurrentBillWorkOn
             // 
             this.lbCurrentBillWorkOn.AutoSize = true;
-            this.lbCurrentBillWorkOn.Location = new System.Drawing.Point(84, 45);
+            this.lbCurrentBillWorkOn.Location = new System.Drawing.Point(72, 13);
             this.lbCurrentBillWorkOn.Name = "lbCurrentBillWorkOn";
             this.lbCurrentBillWorkOn.Size = new System.Drawing.Size(13, 13);
             this.lbCurrentBillWorkOn.TabIndex = 8;
@@ -275,7 +282,7 @@
             // 
             // btnNewBill
             // 
-            this.btnNewBill.Location = new System.Drawing.Point(465, 27);
+            this.btnNewBill.Location = new System.Drawing.Point(0, 47);
             this.btnNewBill.Name = "btnNewBill";
             this.btnNewBill.Size = new System.Drawing.Size(96, 48);
             this.btnNewBill.TabIndex = 7;
@@ -286,21 +293,58 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(12, 45);
+            this.label5.Location = new System.Drawing.Point(0, 13);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(66, 13);
             this.label5.TabIndex = 12;
             this.label5.Text = "Hóa đơn số ";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(12, 40);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(56, 13);
+            this.label6.TabIndex = 4;
+            this.label6.Text = "Nhân viên";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(468, 40);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(32, 13);
+            this.label7.TabIndex = 5;
+            this.label7.Text = "Ngày";
+            // 
+            // lbDisplayName
+            // 
+            this.lbDisplayName.AutoSize = true;
+            this.lbDisplayName.Location = new System.Drawing.Point(84, 40);
+            this.lbDisplayName.Name = "lbDisplayName";
+            this.lbDisplayName.Size = new System.Drawing.Size(91, 13);
+            this.lbDisplayName.TabIndex = 6;
+            this.lbDisplayName.Text = "TÊN NHÂN VIÊN";
+            // 
+            // lbDate
+            // 
+            this.lbDate.AutoSize = true;
+            this.lbDate.Location = new System.Drawing.Point(509, 40);
+            this.lbDate.Name = "lbDate";
+            this.lbDate.Size = new System.Drawing.Size(65, 13);
+            this.lbDate.TabIndex = 7;
+            this.lbDate.Text = "dd/mm/yyyy";
             // 
             // fMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(586, 601);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.btnNewBill);
+            this.Controls.Add(this.lbDate);
+            this.Controls.Add(this.lbDisplayName);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.lsvBill);
-            this.Controls.Add(this.lbCurrentBillWorkOn);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.menuStrip1);
@@ -308,6 +352,7 @@
             this.Name = "fMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Trang chính";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FMain_FormClosing);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.panel3.ResumeLayout(false);
@@ -348,5 +393,9 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label lbDisplayName;
+        private System.Windows.Forms.Label lbDate;
     }
 }

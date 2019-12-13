@@ -22,9 +22,9 @@ USE Canteen
 -- Table ACcount --
 CREATE TABLE Account
 (
-	UserName NVARCHAR(100) PRIMARY KEY,	
+	UserName VARCHAR(100) PRIMARY KEY,	
 	DisplayName NVARCHAR(100) NOT NULL DEFAULT N'User',
-	PassWord NVARCHAR(1000) NOT NULL DEFAULT 0,
+	PassWord VARCHAR(1000) NOT NULL DEFAULT 0,
 	AccType INT NOT NULL  DEFAULT 0 -- 1: admin && 0: staff
 )
 GO
@@ -47,9 +47,8 @@ CREATE TABLE MonAn (
   [idMonAn] INT NOT NULL IDENTITY(1,1),
   [Ten] NVARCHAR(45) NULL,
   [Gia] INT CHECK ([Gia] > 0) NULL,
-  [idLoaiMonAn] INT NOT NULL,--them 7/12/2019
+  [idLoaiMonAn] INT NOT NULL,
   [MieuTa] NVARCHAR(45) NULL,
-  [HinhAnh] NVARCHAR(256) NULL,
   PRIMARY KEY ([idMonAn]))
 ;
 
@@ -126,7 +125,7 @@ CREATE TABLE LoaiMonAn (
 -- -----------------------------------------------------
 -- Table `mydb`.`MonAn_thuoc_LoaiMon_`
 -- -----------------------------------------------------
-CREATE TABLE MonAn_thuoc_LoaiMon_ (
+CREATE TABLE MonAn_thuoc_LoaiMon (
   [LoaiMonAn_idLoaiMonAn] INT NOT NULL,
   [MonAn_idMonAn] INT NOT NULL,
   PRIMARY KEY ([LoaiMonAn_idLoaiMonAn], [MonAn_idMonAn]),
@@ -142,9 +141,9 @@ CREATE TABLE MonAn_thuoc_LoaiMon_ (
     ON UPDATE NO ACTION)
 ;
 
-CREATE INDEX fk_LoaiMonAn_has_MonAn_MonAn1_idx ON MonAn_thuoc_LoaiMon_ ([MonAn_idMonAn] ASC);
+CREATE INDEX fk_LoaiMonAn_has_MonAn_MonAn1_idx ON MonAn_thuoc_LoaiMon ([MonAn_idMonAn] ASC);
 
-CREATE INDEX fk_LoaiMonAn_has_MonAn_LoaiMonAn1_idx ON MonAn_thuoc_LoaiMon_ ([LoaiMonAn_idLoaiMonAn] ASC);
+CREATE INDEX fk_LoaiMonAn_has_MonAn_LoaiMonAn1_idx ON MonAn_thuoc_LoaiMon ([LoaiMonAn_idLoaiMonAn] ASC);
 
 
 /* SET SQL_MODE=@OLD_SQL_MODE; */
