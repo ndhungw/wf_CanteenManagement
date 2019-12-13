@@ -21,7 +21,6 @@ namespace wf_CanteenManagement.DAO
 
         public bool Login(string userName, string password)
         {
-            //string query = $"SELECT * FROM dbo.Account WHERE UserName = N'{userName}' AND PassWord = N'{password}'";
             string query = "USER_Login @userName , @passWord";
             DataTable result = DataProvider.Instance.ExecQuery(query, new object[] { userName, password });
             return result.Rows.Count >0 ;

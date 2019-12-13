@@ -1,12 +1,9 @@
 ﻿use Canteen
 
---Table Account
-INSERT INTO Account(UserName, PassWord, DisplayName, AccType)	VALUES('admin','1234', 'ADMINISTRATOR', 1);
-INSERT INTO Account(UserName, PassWord, DisplayName, AccType)	VALUES('alaska123','123', N'Trần Quang Tùng', 0);
-
 --- Table NhanVien
+INSERT INTO NhanVien(HoTen, NgaySinh)	VALUES(N'Nguyễn Đông Hưng','02/10/1999')
 INSERT INTO NhanVien(HoTen, NgaySinh)	VALUES(N'Trần Phúc Lộc','09/10/1978')
-INSERT INTO NhanVien(HoTen, NgaySinh)   VALUES(N'Đoàn Văn Hậu','05/17/1999')
+INSERT INTO NhanVien(HoTen, NgaySinh)   VALUES(N'Phan Văn Hậu','05/17/1999')
 INSERT INTO NhanVien(HoTen, NgaySinh)	VALUES(N'Huỳnh Tấn Sinh','03/07/1998')
 INSERT INTO NhanVien(HoTen, NgaySinh)	VALUES(N'Nguyễn Thành Chung','12/02/1978')
 INSERT INTO NhanVien(HoTen, NgaySinh)	VALUES(N'Nguyễn Quang Hải','1/5/1998')
@@ -14,6 +11,10 @@ INSERT INTO NhanVien(HoTen, NgaySinh)	VALUES(N'Nguyễn Trọng Hùng','09/16/19
 INSERT INTO NhanVien(HoTen, NgaySinh)	VALUES(N'Đỗ Hùng Dũng','10/04/1989')
 INSERT INTO NhanVien(HoTen, NgaySinh)	VALUES(N'Hà Đức Chinh','09/18/1982')
 INSERT INTO NhanVien(HoTen, NgaySinh)	VALUES(N'Nguyễn Tiến Linh','01/06/1985')
+
+--Table Account
+INSERT INTO Account(UserName, PassWord, DisplayName, AccType, NhanVien_idNhanVien)	VALUES('admin','1234', 'ADMINISTRATOR', 1,1);
+INSERT INTO Account(UserName, PassWord, DisplayName, AccType, NhanVien_idNhanVien)	VALUES('alaska123','123', N'Phan Văn Hậu', 0,3);
 
 ---Table MonAn
 INSERT INTO MonAn(Ten,Gia,idLoaiMonAn,MieuTa)	VALUES(N'Bánh canh',35000,1,NULL)

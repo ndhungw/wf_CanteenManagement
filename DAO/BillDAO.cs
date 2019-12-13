@@ -26,9 +26,9 @@ namespace wf_CanteenManagement.DAO
             return (int)DataProvider.Instance.ExecScalar("SELECT MAX(idHoaDon) FROM dbo.HoaDon");
         }
 
-        public void InsertBill()
+        public void InsertBill(int idNhanvien)
         {
-            DataProvider.Instance.ExecNonQuery("EXEC Them_Hoa_Don @IdNhanVien", new object[] { 1 });
+            DataProvider.Instance.ExecNonQuery("EXEC Them_Hoa_Don @IdNhanVien", new object[] { idNhanvien });
         }
 
         public void RemoveBill(int idBill)

@@ -19,16 +19,6 @@ CREATE DATABASE [Canteen]
 GO
 USE Canteen 
 
--- Table ACcount --
-CREATE TABLE Account
-(
-	UserName VARCHAR(100) PRIMARY KEY,	
-	DisplayName NVARCHAR(100) NOT NULL DEFAULT N'User',
-	PassWord VARCHAR(1000) NOT NULL DEFAULT 0,
-	AccType INT NOT NULL  DEFAULT 0 -- 1: admin && 0: staff
-)
-GO
-
 -- -----------------------------------------------------
 -- Table `mydb`.`NhanVien`
 -- -----------------------------------------------------
@@ -39,6 +29,19 @@ CREATE TABLE NhanVien (
   PRIMARY KEY ([idNhanVien]))
 ;
 
+-- Table ACcount --
+CREATE TABLE Account
+(
+	UserName VARCHAR(100) PRIMARY KEY,	
+	DisplayName NVARCHAR(100) NOT NULL DEFAULT N'User',
+	PassWord VARCHAR(1000) NOT NULL DEFAULT 0,
+	AccType INT NOT NULL  DEFAULT 0, -- 1: admin && 0: staff
+	NhanVien_idNhanVien INT NOT NULL,
+	CONSTRAINT [fk_Account_NhanVien]
+		FOREIGN KEY ([NhanVien_idNhanVien])
+		REFERENCES NhanVien ([idNhanVien])
+)
+GO
 
 -- -----------------------------------------------------
 -- Table `mydb`.`MonAn`

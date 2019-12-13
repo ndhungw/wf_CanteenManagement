@@ -21,6 +21,7 @@ GO
 CREATE PROC Xoa_Hoa_Don_Dang_Tao @IdHoaDon INT
 AS
 BEGIN
+	DELETE dbo.ChiTietHoaDon WHERE HoaDon_idHoaDon = @IdHoaDon
 	DELETE dbo.HoaDon WHERE idHoaDon = @IdHoaDon
 END
 GO

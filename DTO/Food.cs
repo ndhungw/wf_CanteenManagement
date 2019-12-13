@@ -13,18 +13,14 @@ namespace wf_CanteenManagement.DTO
         private string name;
         private int categoryID;
         private float price;
-        //description - bo?
-        //Image - bo?
-        //
 
         public Food(DataRow row)
         {
             this.ID = (int)row["idMonAn"];
             this.Name = row["Ten"].ToString();
-            this.CategoryID = (int)row["idLoaiMonAn"];//them vao CSDL SAU
+            this.CategoryID = (int)row["idLoaiMonAn"];
             this.Price = (int)Convert.ToDouble(row["Gia"].ToString());
         }
-
 
         public int ID { get => iD; set => iD = value; }
         public string Name { get => name; set => name = value; }

@@ -143,7 +143,7 @@ namespace wf_CanteenManagement
         {
             if (isCheckedOut == true && isAddingFood == false)//hóa đơn đầu/đã thanh toán
             {
-                BillDAO.Instance.InsertBill();//Tạo bill mới
+                BillDAO.Instance.InsertBill(sessionInfo.IDNhanVien);//Tạo bill mới
                 IDBillWorkingOn = BillDAO.Instance.GetMaxIDBill();//Lấy ID của bill mới
 
                 lbCurrentBillWorkOn.Text = IDBillWorkingOn.ToString();
@@ -201,7 +201,7 @@ namespace wf_CanteenManagement
                     {
                         lbCurrentBillWorkOn.Text += " - Đã thanh toán";
                         isCheckedOut = true;//Đánh dấu đã thanh toán
-                        IDBillWorkingOn = 0;//Chỉnh idbill về trạng thái không hợp lệ-
+                        //IDBillWorkingOn = 0;//Chỉnh idbill về trạng thái không hợp lệ
                         isAddingFood = false;//Không cho phép thêm món
                         MessageBox.Show("Thanh toán thành công!");
                         return;
@@ -214,7 +214,7 @@ namespace wf_CanteenManagement
         {
             if(isCheckedOut==false)//Chưa thanh toán
             {
-                if(MessageBox.Show("Hóa đơn hiện tại chưa được hoàn thành\nVẫn thoát ra?", "Cảnh báo", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning)
+                if(MessageBox.Show("Hóa đơn hiện tại chưa được hoàn thành!\nBạn vẫn muốn thoát ra?", "Cảnh báo", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning)
                     != System.Windows.Forms.DialogResult.OK)
                 {
                     e.Cancel = true;
@@ -222,7 +222,7 @@ namespace wf_CanteenManagement
                 else
                 {
                     BillDAO.Instance.RemoveBill(IDBillWorkingOn);//Xóa hóa đơn đã tạo nhưng chưa được hoàn thành trong phiên làm việc
-                    MessageBox.Show("Đã xóa hóa đơn hiện tại\n Chương trình sẽ trở về màn hình đăng nhập!");
+                    MessageBox.Show("Đã xóa hóa đơn hiện tại\nChương trình sẽ trở về màn hình đăng nhập!");
                 }
             }
             else

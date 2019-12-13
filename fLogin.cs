@@ -21,10 +21,7 @@ namespace wf_CanteenManagement
 
         private void BtnExit_Click(object sender, EventArgs e)
         {
-            //DialogResult kg = MessageBox.Show("Bạn muốn thoát chương trình?", "Thông báo",
-            //    MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-            //if (kg==DialogResult.OK)
-                Application.Exit();
+            Application.Exit();
         }
 
         private void FLogin_FormClosing(object sender, FormClosingEventArgs e)
@@ -46,7 +43,7 @@ namespace wf_CanteenManagement
                 var query = $"SELECT * FROM dbo.Account WHERE UserName = '{username}'";
                 var data = DataProvider.Instance.ExecQuery(query);
 
-                fMain f = new fMain(new Session(username, password, data.Rows[0][1].ToString()));
+                fMain f = new fMain(new Session(username, password, data.Rows[0][1].ToString(),(int)data.Rows[0][4]));
                 this.Hide();
                 f.ShowDialog();
                 this.Show();
