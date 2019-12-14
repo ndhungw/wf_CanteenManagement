@@ -109,5 +109,15 @@ namespace wf_CanteenManagement
         {
 
         }
+
+        private void fAdmin_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dtgvBill_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }
