@@ -131,12 +131,12 @@
             // columnHeader1
             // 
             this.columnHeader1.Text = "Tên món ăn";
-            this.columnHeader1.Width = 253;
+            this.columnHeader1.Width = 237;
             // 
             // columnHeader2
             // 
             this.columnHeader2.Text = "Số lượng";
-            this.columnHeader2.Width = 55;
+            this.columnHeader2.Width = 72;
             // 
             // columnHeader3
             // 
