@@ -40,7 +40,10 @@
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.panel3 = new System.Windows.Forms.Panel();
+            this.label5 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.lbCurrentBillWorkOn = new System.Windows.Forms.Label();
+            this.btnNewBill = new System.Windows.Forms.Button();
             this.txbToTalPriceOfBill = new System.Windows.Forms.TextBox();
             this.btnCheckout = new System.Windows.Forms.Button();
             this.btnAddFood = new System.Windows.Forms.Button();
@@ -51,9 +54,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.nmFoodCount = new System.Windows.Forms.NumericUpDown();
-            this.lbCurrentBillWorkOn = new System.Windows.Forms.Label();
-            this.btnNewBill = new System.Windows.Forms.Button();
-            this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.lbDisplayName = new System.Windows.Forms.Label();
@@ -100,14 +100,14 @@
             // thôngTinTàiKhoảnToolStripMenuItem
             // 
             this.thôngTinTàiKhoảnToolStripMenuItem.Name = "thôngTinTàiKhoảnToolStripMenuItem";
-            this.thôngTinTàiKhoảnToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.thôngTinTàiKhoảnToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
             this.thôngTinTàiKhoảnToolStripMenuItem.Text = "Thông tin tài khoản";
             this.thôngTinTàiKhoảnToolStripMenuItem.Click += new System.EventHandler(this.ThôngTinTàiKhoảnToolStripMenuItem_Click);
             // 
             // đăngXuấtToolStripMenuItem
             // 
             this.đăngXuấtToolStripMenuItem.Name = "đăngXuấtToolStripMenuItem";
-            this.đăngXuấtToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.đăngXuấtToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
             this.đăngXuấtToolStripMenuItem.Text = "Đăng xuất";
             this.đăngXuấtToolStripMenuItem.Click += new System.EventHandler(this.ĐăngXuấtToolStripMenuItem_Click);
             // 
@@ -118,6 +118,7 @@
             this.columnHeader2,
             this.columnHeader3,
             this.columnHeader4});
+            this.lsvBill.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lsvBill.GridLines = true;
             this.lsvBill.HideSelection = false;
             this.lsvBill.Location = new System.Drawing.Point(12, 71);
@@ -160,6 +161,15 @@
             this.panel3.Size = new System.Drawing.Size(562, 98);
             this.panel3.TabIndex = 1;
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(0, 13);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(66, 13);
+            this.label5.TabIndex = 12;
+            this.label5.Text = "Hóa đơn số ";
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -168,6 +178,25 @@
             this.label1.Size = new System.Drawing.Size(38, 13);
             this.label1.TabIndex = 9;
             this.label1.Text = "TỔNG";
+            // 
+            // lbCurrentBillWorkOn
+            // 
+            this.lbCurrentBillWorkOn.AutoSize = true;
+            this.lbCurrentBillWorkOn.Location = new System.Drawing.Point(72, 13);
+            this.lbCurrentBillWorkOn.Name = "lbCurrentBillWorkOn";
+            this.lbCurrentBillWorkOn.Size = new System.Drawing.Size(13, 13);
+            this.lbCurrentBillWorkOn.TabIndex = 8;
+            this.lbCurrentBillWorkOn.Text = "0";
+            // 
+            // btnNewBill
+            // 
+            this.btnNewBill.Location = new System.Drawing.Point(0, 47);
+            this.btnNewBill.Name = "btnNewBill";
+            this.btnNewBill.Size = new System.Drawing.Size(96, 48);
+            this.btnNewBill.TabIndex = 7;
+            this.btnNewBill.Text = "Tạo hóa đơn mới";
+            this.btnNewBill.UseVisualStyleBackColor = true;
+            this.btnNewBill.Click += new System.EventHandler(this.BtnNewBill_Click);
             // 
             // txbToTalPriceOfBill
             // 
@@ -270,34 +299,6 @@
             0,
             0,
             0});
-            // 
-            // lbCurrentBillWorkOn
-            // 
-            this.lbCurrentBillWorkOn.AutoSize = true;
-            this.lbCurrentBillWorkOn.Location = new System.Drawing.Point(72, 13);
-            this.lbCurrentBillWorkOn.Name = "lbCurrentBillWorkOn";
-            this.lbCurrentBillWorkOn.Size = new System.Drawing.Size(13, 13);
-            this.lbCurrentBillWorkOn.TabIndex = 8;
-            this.lbCurrentBillWorkOn.Text = "0";
-            // 
-            // btnNewBill
-            // 
-            this.btnNewBill.Location = new System.Drawing.Point(0, 47);
-            this.btnNewBill.Name = "btnNewBill";
-            this.btnNewBill.Size = new System.Drawing.Size(96, 48);
-            this.btnNewBill.TabIndex = 7;
-            this.btnNewBill.Text = "Tạo hóa đơn mới";
-            this.btnNewBill.UseVisualStyleBackColor = true;
-            this.btnNewBill.Click += new System.EventHandler(this.BtnNewBill_Click);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(0, 13);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(66, 13);
-            this.label5.TabIndex = 12;
-            this.label5.Text = "Hóa đơn số ";
             // 
             // label6
             // 
